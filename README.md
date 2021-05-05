@@ -1,4 +1,10 @@
 # tinder-clone
 
-My attempt at creating a Tinder clone webapp using React.JS, Redux, and Styled components for the Front-end and Python, Flask, Flask-SQLAlchemy with Migrations for the Back-end.
+My attempt at creating a Tinder clone webapp. 
+
+The tech stack will include: 
+
+Front-end: React.JS, Redux, and Styled components.
+
+Back-end: Python, Flask, Flask-SQLAlchemy with Migrations for the Back-end.
 
