@@ -1,13 +1,19 @@
 import React from "react"; 
-import './App.css';
+
+import styled from 'styled-components';
+
 import Header from './Header';
+
+const Container = styled.div`
+
+`;
 
 function App() {
   return (
-    <div className="App">
+    <Container>
       <Header/>
-      
-    </div>
+
+    </Container>
   );
 }
 
