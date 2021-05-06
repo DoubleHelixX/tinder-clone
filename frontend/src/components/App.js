@@ -1,17 +1,29 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  HashRouter as HRouter,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 import styled from "styled-components";
 
 import Header from "./Header";
 
 const S = {};
-S.Container = styled.div``;
+S.AppContainer = styled.div``;
 
 const App = () => {
   return (
-    <S.Container>
+    <S.AppContainer>
       <Header />
-    </S.Container>
+      <Router>
+        <Switch>
+          <Route path="/"></Route>
+          <Route path="/chat"></Route>
+        </Switch>
+      </Router>
+    </S.AppContainer>
   );
 };
 
