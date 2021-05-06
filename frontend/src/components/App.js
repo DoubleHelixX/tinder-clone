@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 
 import Header from "./Header";
+import { TinderCards } from "./TinderCards";
 
 const S = {};
 S.AppContainer = styled.div``;
@@ -19,7 +20,9 @@ const App = () => {
       <Header />
       <Router>
         <Switch>
-          <Route path="/"></Route>
+          <Route path="/">
+            <TinderCards />
+          </Route>
           <Route path="/chat"></Route>
         </Switch>
       </Router>
