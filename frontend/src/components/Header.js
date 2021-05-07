@@ -23,7 +23,6 @@ S.NavIcon = styled.div`
 
 S.TinderLogo = styled.img`
   content: url(${tinderImg});
-  /* background-size: cover; */
   height: 50px;
   object-fit: contain;
 `;

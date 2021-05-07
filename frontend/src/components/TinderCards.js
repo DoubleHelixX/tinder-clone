@@ -4,6 +4,8 @@ import { useState } from "react";
 import TinderCard from "react-tinder-card";
 import styled from "styled-components";
 
+import nel from "../images/nel.png";
+
 export const TinderCards = () => {
   const [people, setPeople] = useState([
     {
@@ -15,6 +17,10 @@ export const TinderCards = () => {
       name: "Aiony Haust",
       url:
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    },
+    {
+      name: "Nel",
+      url: nel,
     },
   ]);
 

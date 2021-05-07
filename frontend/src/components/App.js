@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 
 import Header from "./Header";
+import { SwipeButtons } from "./SwipeButtons";
 import { TinderCards } from "./TinderCards";
 
 const S = {};
@@ -22,6 +23,7 @@ const App = () => {
         <Switch>
           <Route path="/">
             <TinderCards />
+            <SwipeButtons />
           </Route>
           <Route path="/chat"></Route>
         </Switch>
