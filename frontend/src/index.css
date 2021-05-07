@@ -9,7 +9,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: hidden;
+  /* scroll-snap-type: y mandatory;
+  scroll-snap-align: end; */
+
 }
+body::-webkit-scrollbar-track {
+  border: 1px double rgb(255, 255, 255);
+  padding: 2px 0;
+  background-color: #f3f3f3;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px #c7c7c7;
+  background-color: #fe3c7380;
+  border: 1px solid rgb(255, 255, 255);
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-right-radius: 3px;
+  visibility:hidden;
+}
+
+body:hover::-webkit-scrollbar-thumb {
+  visibility:visible;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

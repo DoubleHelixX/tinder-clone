@@ -2,25 +2,34 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import TinderCard from "react-tinder-card";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import nel from "../images/nel.png";
 
 export const TinderCards = () => {
   const [people, setPeople] = useState([
     {
-      name: "Robert W",
-      url:
-        "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      firstName: "Nel",
+      lastName: "",
+      message: "Hey cutie ! how is your day going? 😃",
+      url: nel,
+      timestamp: "32 minutes ago",
     },
     {
-      name: "Aiony Haust",
+      firstName: "Aiony",
+      lastName: "Haust",
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
       url:
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      timestamp: "2 days ago",
     },
     {
-      name: "Nel",
-      url: nel,
+      firstName: "Robert",
+      lastName: "W",
+      message: `I can give you lots of moneys 😉`,
+      url:
+        "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      timestamp: "1 week ago",
     },
   ]);
 
@@ -60,10 +69,18 @@ export const TinderCards = () => {
   return (
     <S.TinderCardContainer>
       {people.map((person) => (
-        <S.TinderCardSwipe>
-          <TinderCard key={person.name} preventSwipe={["up", "down"]}>
-            <S.TinderCard style={{ backgroundImage: `url(${person.url})` }}>
-              <S.TinderCardName>{person.name}</S.TinderCardName>
+        <S.TinderCardSwipe key={`${person.firstName}-tinderCardSwipe`}>
+          <TinderCard
+            key={`${person.firstName}-tinderCard`}
+            preventSwipe={["up", "down"]}
+          >
+            <S.TinderCard
+              style={{ backgroundImage: `url(${person.url})` }}
+              key={`${person.firstName}-TinderCardDiv`}
+            >
+              <S.TinderCardName key={`${person.firstName}-TinderCardName`}>
+                {`${person.firstName} ${person.lastName}`}
+              </S.TinderCardName>
             </S.TinderCard>
           </TinderCard>
         </S.TinderCardSwipe>

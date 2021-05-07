@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import ReplayIcon from "@material-ui/icons/Replay";
 import CloseIcon from "@material-ui/icons/Close";

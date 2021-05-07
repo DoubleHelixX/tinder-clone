@@ -6,26 +6,40 @@ import {
   Route,
 } from "react-router-dom";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import Header from "./Header";
 import { SwipeButtons } from "./SwipeButtons";
 import { TinderCards } from "./TinderCards";
+import { Chats } from "./Chats";
+import { Chatscreen } from "./ChatScreen";
 
-const S = {};
-S.AppContainer = styled.div``;
+import { contextTheme } from "../shared/_Constants";
 
 const App = () => {
+  const S = {};
+  S.AppContainer = styled.div``;
   return (
     <S.AppContainer>
-      <Header />
       <Router>
         <Switch>
-          <Route path="/">
+          <Route path="/chats/:person">
+            <contextTheme.Provider value="chats">
+              <Header />
+            </contextTheme.Provider>
+            <Chatscreen />
+          </Route>
+          <Route path="/chats">
+            <contextTheme.Provider value="home">
+              <Header />
+            </contextTheme.Provider>
+            <Chats />
+          </Route>
+          <Route exact path="/">
+            <Header />
             <TinderCards />
             <SwipeButtons />
           </Route>
-          <Route path="/chat"></Route>
         </Switch>
       </Router>
     </S.AppContainer>
