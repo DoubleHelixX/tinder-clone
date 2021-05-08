@@ -23,6 +23,9 @@ S.SwipeButtonsContainer = styled.div`
 S.SwipeIconButton = styled(IconButton)`
   background-color: white;
   box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
+  border: groove 2px !important;
+  border-color: #f0f0f1 !important;
+  /* todo */
 `;
 S.SwipeButtonsRepeat = styled(ReplayIcon)`
   padding: 0vw !important;
