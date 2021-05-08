@@ -46,10 +46,13 @@ export const TinderCards = () => {
 
   S.TinderCard = styled.div`
     position: relative;
-    width: 400px;
-    max-width: 85vw;
-    height: 50vh;
-    max-height: 400px;
+    margin: auto;
+    width: auto;
+    max-width: auto;
+    min-width: 85vw;
+    height: auto;
+    min-height: 50vh;
+    max-height: auto;
     padding: 20px;
     border-radius: 20px;
     background-size: cover;
