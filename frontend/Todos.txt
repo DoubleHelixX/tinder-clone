@@ -1,0 +1,5 @@
+- Create account component
+- create login functionality / component
+- create gif functioanlity (gif api??) and images
+- create view users profile functioanlity
+-  
