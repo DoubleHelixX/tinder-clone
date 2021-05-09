@@ -7,7 +7,7 @@ import ForumIcon from "@material-ui/icons/Forum";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-import tinderImg from "../images/tinder-logo.svg";
+import { ReactComponent as tinderLogo } from "../images/tinder-logo.svg";
 
 import { contextTheme } from "../shared/_Constants";
 
@@ -29,29 +29,70 @@ const Header = () => {
     padding: 20px;
   `;
 
-  S.TinderLogo = styled.img`
-    content: url(${tinderImg});
+  S.TinderLogo = styled(tinderLogo)`
+    /* content: url(${tinderLogo}); */
     height: 50px;
+    width: auto;
     object-fit: contain;
+
+    ${headerType &&
+    `
+        & > path {
+        fill: #D3D3D3 ;
+        stroke: #c0c0c0;
+        }
+        & > path:hover {
+            fill: #FF5765;
+          }
+    `};
   `;
 
+  S.PersonIcon = styled(PersonIcon)`
+    color: #d3d3d3;
+    &:hover {
+      color: #ff5765;
+    }
+    ${headerType === "account" &&
+    `
+      color:#FF5765
+      // border: 2px solid #c0c0c0;
+    `};
+  `;
+  S.ArrowBackIosIcon = styled(ArrowBackIosIcon)`
+    color: #ff5765;
+  `;
+  S.ForumIcon = styled(ForumIcon)`
+    color: #d3d3d3;
+    &:hover {
+      color: #ff5765;
+    }
+    ${headerType === "chats" &&
+    ` 
+      color:#FF5765
+      // border: 2px solid #c0c0c0;
+    `};
+  `;
   return (
     <S.NavContainer>
       <S.NavIcon>
         {headerType === null ? (
-          <IconButton>
-            <PersonIcon fontSize="large" />
-          </IconButton>
+          <Link to="/account">
+            <IconButton>
+              <S.PersonIcon fontSize="large" />
+            </IconButton>
+          </Link>
         ) : (
           [
-            headerType === "home" ? (
-              <IconButton onClick={() => history.replace("/")}>
-                <ArrowBackIosIcon fontSize="large" />
+            headerType === "chatscreen" ? (
+              <IconButton onClick={() => history.goBack()}>
+                <S.ArrowBackIosIcon />
               </IconButton>
             ) : (
-              <IconButton onClick={() => history.replace("/chats")}>
-                <ArrowBackIosIcon fontSize="large" />
-              </IconButton>
+              <Link to="/account">
+                <IconButton>
+                  <S.PersonIcon fontSize="large" />
+                </IconButton>
+              </Link>
             ),
           ]
         )}
@@ -60,9 +101,11 @@ const Header = () => {
         <S.TinderLogo />
       </Link>
       <S.NavIcon>
-        <IconButton onClick={() => history.push("chats")}>
-          <ForumIcon fontSize="large" />
-        </IconButton>
+        <Link to="/chats">
+          <IconButton>
+            <S.ForumIcon fontSize="large" />
+          </IconButton>
+        </Link>
       </S.NavIcon>
     </S.NavContainer>
   );

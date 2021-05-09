@@ -13,6 +13,7 @@ import { SwipeButtons } from "./SwipeButtons";
 import { TinderCards } from "./TinderCards";
 import { Chats } from "./Chats";
 import { Chatscreen } from "./ChatScreen";
+import { Account } from "./Account";
 
 import { contextTheme } from "../shared/_Constants";
 
@@ -24,16 +25,19 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/chats/:person">
-            <contextTheme.Provider value="chats">
+            <contextTheme.Provider value="chatscreen">
               <Header />
             </contextTheme.Provider>
             <Chatscreen />
           </Route>
           <Route path="/chats">
-            <contextTheme.Provider value="home">
+            <contextTheme.Provider value="chats">
               <Header />
             </contextTheme.Provider>
             <Chats />
+          </Route>
+          <Route exact path="/account">
+            <Account />
           </Route>
           <Route exact path="/">
             <Header />
