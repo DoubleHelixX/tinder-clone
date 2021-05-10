@@ -118,7 +118,9 @@ export const Chatscreen = () => {
     -moz-outline-radius: 20px;
     overflow: hidden;
   `;
-  S.FormButton = styled.button`
+  S.FormButton = styled.button.attrs((props) => ({
+    type: props.type || "button",
+  }))`
     border: none;
     margin-right: 20px;
     background-color: white;

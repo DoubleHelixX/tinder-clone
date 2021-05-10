@@ -4,6 +4,7 @@ import {
   HashRouter as HRouter,
   Switch,
   Route,
+  useRouteMatch,
 } from "react-router-dom";
 
 import styled from "styled-components/macro";
@@ -20,6 +21,7 @@ import { contextTheme } from "../shared/_Constants";
 const App = () => {
   const S = {};
   S.AppContainer = styled.div``;
+  // const match = useRouteMatch();
   return (
     <S.AppContainer>
       <Router>
@@ -37,6 +39,9 @@ const App = () => {
             <Chats />
           </Route>
           <Route exact path="/account">
+            <contextTheme.Provider value="account">
+              <Header />
+            </contextTheme.Provider>
             <Account />
           </Route>
           <Route exact path="/">

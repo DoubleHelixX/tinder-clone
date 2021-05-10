@@ -53,7 +53,7 @@ const Header = () => {
       color: #ff5765;
     }
     ${headerType === "account" &&
-    `
+    ` 
       color:#FF5765
       // border: 2px solid #c0c0c0;
     `};
@@ -69,7 +69,6 @@ const Header = () => {
     ${headerType === "chats" &&
     ` 
       color:#FF5765
-      // border: 2px solid #c0c0c0;
     `};
   `;
   return (
