@@ -1,13 +1,24 @@
 import React from "react";
+import {
+  spin,
+  heartBeat,
+  rubberBand,
+  animationFrames,
+  slightRotate,
+  bounce,
+  jello,
+} from "../shared//keyframes";
 import styled from "styled-components";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import Avatar from "@material-ui/core/Avatar";
 import EditIcon from "@material-ui/icons/Edit";
+import BorderColorOutlinedIcon from "@material-ui/icons/BorderColorOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import nel from "../images/nel.png";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-import VerifiedUserTwoToneIcon from "@material-ui/icons/VerifiedUserTwoTone";
+import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import IconButton from "@material-ui/core/IconButton";
+import "../index.css";
 
 export const Account = () => {
   const S = {};
@@ -31,20 +42,15 @@ export const Account = () => {
     /* border: 2px inset #b1b1b1; */
     border: 2px outset #fdfdfd;
   `;
-  S.EditIcon = styled(EditIcon)`
+  S.BorderColorOutlinedIcon = styled(BorderColorOutlinedIcon)`
     color: #bebdc1;
     border-radius: 30px;
-    background-color: #f9f9f9;
-    /* border: 2px red solid; */
+    background-color: #ffffff;
     position: absolute;
-    top: 10px;
-    right: 5px;
-    padding: 8px;
-    border: 2px solid #b1b1b1;
-    cursor: pointer;
-    &:hover {
-      border: 2px groove #b1b1b1;
-    }
+    top: 18px;
+    right: 20px;
+    padding: 0px;
+    pointer-events: none;
   `;
 
   S.UserDetails = styled.h2``;
@@ -76,18 +82,27 @@ export const Account = () => {
     /* border: red 2px solid; */
   `;
   S.PhotoCameraIconContainer = styled.div`
-    display: block;
+    display: inline-flex;
     position: relative;
+    background-color: transparent;
+    /* border: 2px red solid; */
+    border-radius: 30px;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+    align-items: center;
     /* padding: 10px; */
     /* border: red 2px solid; */
   `;
   S.SettingsIcon = styled(SettingsIcon)`
+    position: relative;
     color: #98969c;
     border-radius: 30px;
     background-color: white;
-    padding: 12px;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
-    border: 2px outset #fdfdfd;
+    pointer-events: none;
+    padding: 10px;
+    /* border: 2px outset #fdfdfd; */
   `;
   S.PhotoCameraIcon = styled(PhotoCameraIcon)`
     color: white;
@@ -96,18 +111,82 @@ export const Account = () => {
     padding: 12px;
     box-shadow: 0px 5px 53px 0px rgba(0, 0, 0, 0.3);
     border: 2px outset #fdfdfd;
+    &:hover {
+      border: 2px inset #fdfdfd;
+    }
   `;
-  S.VerifiedUserTwoToneIcon = styled(VerifiedUserTwoToneIcon)`
+  S.VerifiedUserOutlinedIcon = styled(VerifiedUserOutlinedIcon)`
+    position: relative;
     color: #98969c;
     border-radius: 30px;
-    background-color: white;
-    padding: 12px;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+    pointer-events: none;
+    padding: 10px;
+    /* border: 2px outset #fdfdfd;
+    &:hover {
+      border: 2px inset #fdfdfd;
+    } */
+  `;
+
+  S.ButtonBorder = styled.span`
+    position: absolute;
+    top: ${(props) => (props.top ? props.top : "none")};
+    right: ${(props) => (props.right ? props.right : "none")};
+    color: white;
+    border-radius: 30px;
+    background-color: #ffffff !important;
+    padding: ${(props) => (props.padding ? props.padding : "24px")};
     border: 2px outset #fdfdfd;
+    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border: 2px inset #fdfdfd;
+    }
+    &:hover + ${S.BorderColorOutlinedIcon} {
+      animation-name: ${jello};
+      transform-origin: center;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+    }
+    /* pointer-events: none !important; */
+  `;
+
+  S.IconButton = styled(IconButton)`
+    &:hover ${S.SettingsIcon} {
+      -webkit-animation-name: ${spin};
+      -webkit-animation-duration: 4000ms;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -moz-animation-name: ${spin};
+      -moz-animation-duration: 4000ms;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      -ms-animation-name: ${spin};
+      -ms-animation-duration: 4000ms;
+      -ms-animation-iteration-count: infinite;
+      -ms-animation-timing-function: linear;
+
+      animation-name: ${spin};
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    &:hover ${S.VerifiedUserOutlinedIcon} {
+      background-color: none;
+      animation-name: ${heartBeat};
+      animation-duration: 1.5s;
+      animation-timing-function: ease-in-out;
+    }
+    &:hover .plusMedia {
+      animation-name: ${bounce};
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in-out;
+      /* transform-origin: center bottom; */
+    }
   `;
   S.ButtonsText = styled.p`
     color: #98969c;
-    font-family: Arial, sans-serif;
+    /* font-family: "Montserrat", sans-serif; */
     font-size: 15px;
     font-weight: 500;
     text-align: center;
@@ -127,9 +206,9 @@ export const Account = () => {
       rgba(246, 77, 143, 1) 100%
     );
     border-radius: 10px;
-    padding: 10px 8px;
+    padding: 4px 8px;
     margin: 15px;
-    width: 84.783vw;
+    width: 94.783vw;
   `;
   S.Tip = styled.p`
     color: white;
@@ -151,9 +230,9 @@ export const Account = () => {
     border-radius: 20px;
     position: absolute;
     right: -5px;
-    bottom: 5px;
+    bottom: -5px;
     box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.1);
-    border: 1px outset #fdfdfd;
+    border: 2px outset #fdfdfd;
   `;
   S.AdContainer = styled.div``;
   S.Ad = styled.p``;
@@ -166,37 +245,40 @@ export const Account = () => {
           alt={nel}
           src={nel}
         ></S.Avatar>
-        <S.EditIcon
-          style={{ height: "25px", width: "25px" }}
-          fontSize="default"
-        />
+        <S.ButtonBorder top="12px" right="15px" padding="14px" />
+
+        <S.BorderColorOutlinedIcon style={{ height: "20px", width: "20px" }} />
       </S.AvatarContainer>
 
       <S.UserDetails>Nel, 102</S.UserDetails>
-      <S.Occupation>Software Developer at Freelance</S.Occupation>
-      <S.School>CUNY New York City College of Technology</S.School>
+      <S.Occupation>
+        Full time professional sleeper at nursing home
+      </S.Occupation>
+      <S.School>Orkin Pigeon Academy</S.School>
       <S.ButtonsContainer>
         <S.ButtonContainer>
-          <IconButton>
+          <S.IconButton>
+            <S.ButtonBorder />
             <S.SettingsIcon style={{ height: "25px", width: "25px" }} />
-          </IconButton>
+          </S.IconButton>
           <S.ButtonsText>SETTINGS</S.ButtonsText>
         </S.ButtonContainer>
         <S.ButtonContainer>
-          <IconButton>
+          <S.IconButton>
             <S.PhotoCameraIconContainer>
               <S.PhotoCameraIcon fontSize="large" />
-              <S.PlusMedia />
+              <S.PlusMedia className="plusMedia" />
             </S.PhotoCameraIconContainer>
-          </IconButton>
+          </S.IconButton>
           <S.ButtonsText>ADD MEDIA</S.ButtonsText>
         </S.ButtonContainer>
         <S.ButtonContainer>
-          <IconButton>
-            <S.VerifiedUserTwoToneIcon
+          <S.IconButton>
+            <S.ButtonBorder />
+            <S.VerifiedUserOutlinedIcon
               style={{ height: "25px", width: "25px" }}
             />
-          </IconButton>
+          </S.IconButton>
           <S.ButtonsText>SAFETY</S.ButtonsText>
         </S.ButtonContainer>
       </S.ButtonsContainer>
