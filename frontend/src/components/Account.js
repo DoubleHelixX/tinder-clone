@@ -11,14 +11,16 @@ import {
 import styled from "styled-components";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import Avatar from "@material-ui/core/Avatar";
-import EditIcon from "@material-ui/icons/Edit";
-import BorderColorOutlinedIcon from "@material-ui/icons/BorderColorOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import nel from "../images/nel.png";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import IconButton from "@material-ui/core/IconButton";
-import "../index.css";
+import { ReactComponent as tinderLogo } from "../images/tinder-logo.svg";
+
+// import EditIcon from "@material-ui/icons/Edit";
+// import BorderColorOutlinedIcon from "@material-ui/icons/BorderColorOutlined";
+// import "../index.css";
 
 export const Account = () => {
   const S = {};
@@ -26,12 +28,26 @@ export const Account = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f5f7fa;
+    overflow: hidden !important;
+  `;
+  S.ContentBody = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 4px 10px -4px hsl(0deg 0% 53% / 28%);
+    border-bottom-left-radius: 50% 60px;
+    border-bottom-right-radius: 50% 60px;
+    background-color: white;
+    padding-bottom: 82px;
+    margin-bottom: 5px;
   `;
   S.AvatarContainer = styled.div`
     display: block;
     position: relative;
     padding: 10px;
-    /* border: red 2px solid; */
+    margin-top: 95px;
   `;
   S.Avatar = styled(Avatar)`
     border-radius: 20px;
@@ -41,8 +57,6 @@ export const Account = () => {
     width: 130px !important;
     height: 130px !important;
     object-fit: cover !important;
-
-    /* border: 2px inset #b1b1b1; */
     border: 2px solid #e0e0e0;
   `;
   S.PencilIcon = styled.svg`
@@ -76,15 +90,12 @@ export const Account = () => {
     font-family: Arial, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
-    /* border: solid red 2px; */
   `;
   S.ButtonsContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: space-between;
     width: 100%;
-
-    /* border: red 2px solid; */
   `;
   S.ButtonContainer = styled.div`
     display: flex;
@@ -93,21 +104,17 @@ export const Account = () => {
     align-items: center;
     padding: 10px 52px;
     width: 100%;
-    /* border: red 2px solid; */
   `;
   S.PhotoCameraIconContainer = styled.div`
     display: inline-flex;
     position: relative;
     background-color: transparent;
-    /* border: 2px red solid; */
     border-radius: 30px;
     padding: 0;
     margin: 0;
     width: auto;
     height: auto;
     align-items: center;
-    /* padding: 10px; */
-    /* border: red 2px solid; */
   `;
   S.SettingsIcon = styled(SettingsIcon)`
     position: relative;
@@ -116,9 +123,8 @@ export const Account = () => {
     background-color: white;
     pointer-events: none;
     padding: 10px;
-    width: 25px !important;
-    height: 25px !important;
-    /* border: 2px outset #fdfdfd; */
+    width: 25px;
+    height: 25px;
   `;
   S.PhotoCameraIcon = styled(PhotoCameraIcon)`
     color: white;
@@ -131,7 +137,7 @@ export const Account = () => {
       rgba(255, 111, 89, 1) 100%
     );
     padding: 12px;
-    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12);
 
     border: 1px solid #e0e0e0;
     border: 2px outset rgba(254, 46, 121, 1);
@@ -143,10 +149,6 @@ export const Account = () => {
     background-color: transparent;
     pointer-events: none;
     padding: 10px;
-    /* border: 2px outset #fdfdfd;
-    &:hover {
-      border: 2px inset #fdfdfd;
-    } */
   `;
 
   S.ButtonBorder = styled.span`
@@ -155,10 +157,10 @@ export const Account = () => {
     right: ${(props) => (props.right ? props.right : "none")};
     color: white;
     border-radius: 30px;
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     padding: ${(props) => (props.padding ? props.padding : "24px")};
     border: 2px outset #fdfdfd;
-    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12);
 
     cursor: pointer;
 
@@ -171,7 +173,6 @@ export const Account = () => {
       animation-duration: 1s;
       animation-timing-function: ease-in-out;
     }
-    /* pointer-events: none !important; */
   `;
 
   S.IconButton = styled(IconButton)`
@@ -207,25 +208,21 @@ export const Account = () => {
       animation-name: ${bounce};
       animation-duration: 0.7s;
       animation-timing-function: ease-in-out;
-      /* transform-origin: center bottom; */
     }
     &:hover ${S.PhotoCameraIconContainer} ${S.PlusMedia} {
       animation-name: ${bounce};
       animation-duration: 0.7s;
       animation-timing-function: ease-in-out;
-      /* transform-origin: center bottom; */
     }
   `;
 
   S.ButtonsText = styled.p`
     color: #98969c;
-    /* font-family: "Montserrat", sans-serif; */
     font-size: 15px;
     font-weight: 500;
     text-align: center;
     min-width: 90px;
     width: auto;
-    /* border: 2px red solid; */
   `;
   S.TipContainer = styled.div`
     display: flex;
@@ -236,20 +233,20 @@ export const Account = () => {
     padding: 4px 8px;
     margin: 15px;
     width: 94.783vw;
+    margin-top: 90px;
   `;
   S.Tip = styled.p`
     color: white;
     flex: 1;
     padding-left: 10px;
-
-    /* font-size: 12px; */
+    font-family: Arial, sans-serif;
+    font-weight: 600;
   `;
   S.Plus = styled(AddCircleRoundedIcon)`
     background-color: transparent;
     color: white;
     padding: 0 0 0 15px;
-
-    /* border-radius: 20px; */
+    cursor: pointer;
   `;
   S.PlusMedia = styled.div`
     background-color: white;
@@ -260,69 +257,134 @@ export const Account = () => {
     padding: 0px 6px;
     right: -5px;
     bottom: 0px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.52) !important;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.52);
     border: 2px inset rgba(254, 46, 121, 1);
   `;
-  S.AdContainer = styled.div``;
-  S.Ad = styled.p``;
+  S.AdContainer = styled.div`
+    background-color: #f5f7fa;
+    width: 80%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    position: relative;
+    align-items: start;
+    width: 90%;
+    flex-direction: center;
+    border: 2px red solid;
+  `;
+  S.AdTitleContents = styled.div`
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+  `;
+  S.TinderLogo = styled(tinderLogo)`
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+
+    & > path {
+      fill: #1f1f1f;
+    }
+  `;
+
+  S.AdTitle = styled.h3`
+    font-family: Arial, sans-serif;
+  `;
+  S.AdDescription = styled.p``;
+
+  const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+  const delay = 2700;
+
+  function Slideshow() {
+    const [index, setIndex] = React.useState(0);
+    const timeoutRef = React.useRef(null);
+
+    function resetTimeout() {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    }
+
+    React.useEffect(() => {
+      resetTimeout();
+      timeoutRef.current = setTimeout(
+        () =>
+          setIndex((prevIndex) =>
+            prevIndex === colors.length - 1 ? 0 : prevIndex + 1
+          ),
+        delay
+      );
+
+      return () => {
+        resetTimeout();
+      };
+    }, [index]);
+  }
 
   return (
     <S.AccountContainer>
-      <S.AvatarContainer>
-        <S.Avatar alt={nel} src={nel}></S.Avatar>
-        <S.ButtonBorder top="12px" right="15px" padding="15px" />
+      <S.ContentBody>
+        <S.AvatarContainer>
+          <S.Avatar alt={nel} src={nel}></S.Avatar>
+          <S.ButtonBorder top="12px" right="15px" padding="15px" />
 
-        <S.PencilIcon
-          focusable="false"
-          aria-hidden="true"
-          role="presentation"
-          viewBox="-5 -5 34 34"
-        >
-          <path d="M17.079 2c-.41 0-.81.158-1.125.463l-2.23 2.229 5.574 5.583 2.229-2.208c.63-.641.63-1.64 0-2.25l-3.334-3.354A1.605 1.605 0 0 0 17.08 2m-4.101 3.438L4.46 13.966l2.691.295.19 2.408 2.397.179.305 2.691 8.518-8.527M3.84 14.944L2 21.98l7.045-1.882-.252-2.272-2.43-.178-.188-2.44"></path>
-        </S.PencilIcon>
-      </S.AvatarContainer>
+          <S.PencilIcon
+            focusable="false"
+            aria-hidden="true"
+            role="presentation"
+            viewBox="-5 -5 34 34"
+          >
+            <path d="M17.079 2c-.41 0-.81.158-1.125.463l-2.23 2.229 5.574 5.583 2.229-2.208c.63-.641.63-1.64 0-2.25l-3.334-3.354A1.605 1.605 0 0 0 17.08 2m-4.101 3.438L4.46 13.966l2.691.295.19 2.408 2.397.179.305 2.691 8.518-8.527M3.84 14.944L2 21.98l7.045-1.882-.252-2.272-2.43-.178-.188-2.44"></path>
+          </S.PencilIcon>
+        </S.AvatarContainer>
 
-      <S.UserDetails>Nel, 102</S.UserDetails>
-      <S.Occupation>
-        Full time professional sleeper at nursing home
-      </S.Occupation>
-      <S.School>Orkin Pigeon Academy</S.School>
-      <S.ButtonsContainer>
-        <S.ButtonContainer>
-          <S.IconButton>
-            <S.ButtonBorder />
-            <S.SettingsIcon />
-          </S.IconButton>
-          <S.ButtonsText>SETTINGS</S.ButtonsText>
-        </S.ButtonContainer>
-        <S.ButtonContainer>
-          <S.IconButton>
-            <S.PhotoCameraIconContainer>
-              <S.PhotoCameraIcon fontSize="large" />
-              <S.PlusMedia className="plusMedia">+</S.PlusMedia>
+        <S.UserDetails>Nel, 102</S.UserDetails>
+        <S.Occupation>
+          Full time professional sleeper at nursing home
+        </S.Occupation>
+        <S.School>Orkin Pigeon Academy</S.School>
+        <S.ButtonsContainer>
+          <S.ButtonContainer>
+            <S.IconButton>
+              <S.ButtonBorder />
+              <S.SettingsIcon />
+            </S.IconButton>
+            <S.ButtonsText>SETTINGS</S.ButtonsText>
+          </S.ButtonContainer>
+          <S.ButtonContainer>
+            <S.IconButton>
+              <S.PhotoCameraIconContainer>
+                <S.PhotoCameraIcon fontSize="large" />
+                <S.PlusMedia className="plusMedia">+</S.PlusMedia>
+              </S.PhotoCameraIconContainer>
+            </S.IconButton>
+            <S.ButtonsText>ADD MEDIA</S.ButtonsText>
+          </S.ButtonContainer>
+          <S.ButtonContainer>
+            <S.IconButton>
+              <S.ButtonBorder />
+              <S.VerifiedUserOutlinedIcon />
+            </S.IconButton>
+            <S.ButtonsText>SAFETY</S.ButtonsText>
+          </S.ButtonContainer>
+        </S.ButtonsContainer>
+        <S.TipContainer>
+          <S.Tip>Photo Tip: Try to keep your tongue in your mouth</S.Tip>
+          <S.Plus fontSize="large" />
+        </S.TipContainer>
+      </S.ContentBody>
 
-              {/* <span>+</span> */}
-            </S.PhotoCameraIconContainer>
-          </S.IconButton>
-          <S.ButtonsText>ADD MEDIA</S.ButtonsText>
-        </S.ButtonContainer>
-        <S.ButtonContainer>
-          <S.IconButton>
-            <S.ButtonBorder />
-            <S.VerifiedUserOutlinedIcon />
-          </S.IconButton>
-          <S.ButtonsText>SAFETY</S.ButtonsText>
-        </S.ButtonContainer>
-      </S.ButtonsContainer>
-      <S.TipContainer>
-        <S.Tip>Photo Tip: Try to keep your tongue in your mouth</S.Tip>
-        <S.Plus fontSize="large" />
-      </S.TipContainer>
       <S.AdContainer>
-        <S.Ad></S.Ad>
+        <S.AdTitleContents>
+          <S.TinderLogo />
+          <S.AdTitle>Tinder Platinum™️</S.AdTitle>
+        </S.AdTitleContents>
+        <S.AdDescription></S.AdDescription>
       </S.AdContainer>
     </S.AccountContainer>
   );
 };
-
-//FE2E79   FF6F59

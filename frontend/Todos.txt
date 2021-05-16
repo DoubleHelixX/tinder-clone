@@ -3,3 +3,9 @@
 - create gif functioanlity (gif api??) and images
 - create view users profile functioanlity
 -  
+
+
+photo tips:
+Don't forget to keep your photos fresh
+Not everyone appreciates only gym photos
+Some people want to see you smile

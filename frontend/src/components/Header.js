@@ -22,6 +22,7 @@ const Header = () => {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #f9f9f9;
+    box-shadow: 0px 4px 10px -4px hsl(0deg 0% 23% / 32%);
     align-items: center;
     padding-left: 54px;
     padding-right: 54px;
@@ -35,16 +36,20 @@ const Header = () => {
     height: 34px;
     width: auto;
     object-fit: contain;
-
-    ${headerType &&
-    `
-      & > path {
-      fill: #D3D3D3 ;
+    & > path {
+      fill: #d3d3d3;
       stroke: #c0c0c0;
-      }
-      & > path:hover {
-          fill: #FF5765;
-        }
+    }
+    & > path:hover {
+      fill: #ff5765;
+    }
+
+    ${headerType === "home" &&
+    `
+    & > path {
+      fill: #ff5765;
+    }
+    
     `};
   `;
 
@@ -96,7 +101,7 @@ const Header = () => {
     width: 30px;
     height: 30px;
     &:hover > path {
-      fill: #f1c76b;
+      fill: #f2cc71;
     }
     ${headerType === "gold" &&
     ` 

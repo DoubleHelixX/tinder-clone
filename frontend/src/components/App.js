@@ -56,7 +56,10 @@ const App = () => {
             </contextTheme.Provider>
           </Route>
           <Route exact path="/">
-            <Header />
+            <contextTheme.Provider value="home">
+              <Header />
+            </contextTheme.Provider>
+
             <S.TinderBodyContainer>
               <TinderCards />
               <SwipeButtons />
