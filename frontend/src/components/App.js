@@ -21,6 +21,12 @@ import { contextTheme } from "../shared/_Constants";
 const App = () => {
   const S = {};
   S.AppContainer = styled.div``;
+  S.TinderBodyContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `;
+
   // const match = useRouteMatch();
   return (
     <S.AppContainer>
@@ -44,10 +50,17 @@ const App = () => {
             </contextTheme.Provider>
             <Account />
           </Route>
+          <Route exact path="/gold">
+            <contextTheme.Provider value="gold">
+              <Header />
+            </contextTheme.Provider>
+          </Route>
           <Route exact path="/">
             <Header />
-            <TinderCards />
-            <SwipeButtons />
+            <S.TinderBodyContainer>
+              <TinderCards />
+              <SwipeButtons />
+            </S.TinderBodyContainer>
           </Route>
         </Switch>
       </Router>

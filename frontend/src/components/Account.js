@@ -34,23 +34,35 @@ export const Account = () => {
     /* border: red 2px solid; */
   `;
   S.Avatar = styled(Avatar)`
-    object-fit: cover;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.2);
+    width: 130px !important;
+    height: 130px !important;
+    object-fit: cover !important;
+
     /* border: 2px inset #b1b1b1; */
-    border: 2px outset #fdfdfd;
+    border: 2px solid #e0e0e0;
   `;
-  S.BorderColorOutlinedIcon = styled(BorderColorOutlinedIcon)`
+  S.PencilIcon = styled.svg`
     color: #bebdc1;
     border-radius: 30px;
     background-color: #ffffff;
     position: absolute;
-    top: 18px;
+    top: 17px;
     right: 20px;
     padding: 0px;
     pointer-events: none;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    /* transform: scale(0.75); */
+
+    & > path {
+      fill: #a9a9a9;
+      stroke: #ffffff;
+    }
   `;
 
   S.UserDetails = styled.h2``;
@@ -58,10 +70,12 @@ export const Account = () => {
     /* border: solid red 2px; */
     font-family: Arial, sans-serif;
     font-size: 18px;
+    color: #2c2c2c;
   `;
   S.School = styled.p`
     font-family: Arial, sans-serif;
     font-size: 18px;
+    color: #2c2c2c;
     /* border: solid red 2px; */
   `;
   S.ButtonsContainer = styled.div`
@@ -102,18 +116,25 @@ export const Account = () => {
     background-color: white;
     pointer-events: none;
     padding: 10px;
+    width: 25px !important;
+    height: 25px !important;
     /* border: 2px outset #fdfdfd; */
   `;
   S.PhotoCameraIcon = styled(PhotoCameraIcon)`
     color: white;
     border-radius: 30px;
-    background-color: #ff5765;
+    background: rgb(254, 46, 121);
+    background: linear-gradient(
+      87deg,
+      rgba(254, 46, 121, 1) 0%,
+      rgba(254, 78, 104, 1) 45%,
+      rgba(255, 111, 89, 1) 100%
+    );
     padding: 12px;
-    box-shadow: 0px 5px 53px 0px rgba(0, 0, 0, 0.3);
-    border: 2px outset #fdfdfd;
-    &:hover {
-      border: 2px inset #fdfdfd;
-    }
+    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12) !important;
+
+    border: 1px solid #e0e0e0;
+    border: 2px outset rgba(254, 46, 121, 1);
   `;
   S.VerifiedUserOutlinedIcon = styled(VerifiedUserOutlinedIcon)`
     position: relative;
@@ -137,12 +158,14 @@ export const Account = () => {
     background-color: #ffffff !important;
     padding: ${(props) => (props.padding ? props.padding : "24px")};
     border: 2px outset #fdfdfd;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.12) !important;
+
+    cursor: pointer;
 
     &:hover {
       border: 2px inset #fdfdfd;
     }
-    &:hover + ${S.BorderColorOutlinedIcon} {
+    &:hover + ${S.PencilIcon} {
       animation-name: ${jello};
       transform-origin: center;
       animation-duration: 1s;
@@ -174,16 +197,26 @@ export const Account = () => {
     &:hover ${S.VerifiedUserOutlinedIcon} {
       background-color: none;
       animation-name: ${heartBeat};
-      animation-duration: 1.5s;
+      animation-duration: 1.3s;
       animation-timing-function: ease-in-out;
+    }
+    &:hover ${S.PhotoCameraIcon} {
+      border: 2px inset rgba(254, 46, 121, 1);
     }
     &:hover .plusMedia {
       animation-name: ${bounce};
-      animation-duration: 0.5s;
+      animation-duration: 0.7s;
+      animation-timing-function: ease-in-out;
+      /* transform-origin: center bottom; */
+    }
+    &:hover ${S.PhotoCameraIconContainer} ${S.PlusMedia} {
+      animation-name: ${bounce};
+      animation-duration: 0.7s;
       animation-timing-function: ease-in-out;
       /* transform-origin: center bottom; */
     }
   `;
+
   S.ButtonsText = styled.p`
     color: #98969c;
     /* font-family: "Montserrat", sans-serif; */
@@ -198,13 +231,7 @@ export const Account = () => {
     display: flex;
     align-items: center;
     background: rgb(255, 117, 86);
-    background: linear-gradient(
-      87deg,
-      #ff7556 13%,
-      rgba(255, 117, 86, 1) 5%,
-      rgba(255, 98, 141, 1) 69%,
-      rgba(246, 77, 143, 1) 100%
-    );
+    background: linear-gradient(87deg, #fd8f76 5%, #fb8297 49%, #fd669f 100%);
     border-radius: 10px;
     padding: 4px 8px;
     margin: 15px;
@@ -224,15 +251,17 @@ export const Account = () => {
 
     /* border-radius: 20px; */
   `;
-  S.PlusMedia = styled(AddCircleRoundedIcon)`
-    background-color: rgba(246, 77, 143, 1);
-    color: white;
-    border-radius: 20px;
+  S.PlusMedia = styled.div`
+    background-color: white;
+    font-size: 20px;
+    color: rgba(254, 46, 121, 1);
+    border-radius: 25px;
     position: absolute;
+    padding: 0px 6px;
     right: -5px;
-    bottom: -5px;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.1);
-    border: 2px outset #fdfdfd;
+    bottom: 0px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.52) !important;
+    border: 2px inset rgba(254, 46, 121, 1);
   `;
   S.AdContainer = styled.div``;
   S.Ad = styled.p``;
@@ -240,14 +269,17 @@ export const Account = () => {
   return (
     <S.AccountContainer>
       <S.AvatarContainer>
-        <S.Avatar
-          style={{ height: "130px", width: "130px" }}
-          alt={nel}
-          src={nel}
-        ></S.Avatar>
-        <S.ButtonBorder top="12px" right="15px" padding="14px" />
+        <S.Avatar alt={nel} src={nel}></S.Avatar>
+        <S.ButtonBorder top="12px" right="15px" padding="15px" />
 
-        <S.BorderColorOutlinedIcon style={{ height: "20px", width: "20px" }} />
+        <S.PencilIcon
+          focusable="false"
+          aria-hidden="true"
+          role="presentation"
+          viewBox="-5 -5 34 34"
+        >
+          <path d="M17.079 2c-.41 0-.81.158-1.125.463l-2.23 2.229 5.574 5.583 2.229-2.208c.63-.641.63-1.64 0-2.25l-3.334-3.354A1.605 1.605 0 0 0 17.08 2m-4.101 3.438L4.46 13.966l2.691.295.19 2.408 2.397.179.305 2.691 8.518-8.527M3.84 14.944L2 21.98l7.045-1.882-.252-2.272-2.43-.178-.188-2.44"></path>
+        </S.PencilIcon>
       </S.AvatarContainer>
 
       <S.UserDetails>Nel, 102</S.UserDetails>
@@ -259,7 +291,7 @@ export const Account = () => {
         <S.ButtonContainer>
           <S.IconButton>
             <S.ButtonBorder />
-            <S.SettingsIcon style={{ height: "25px", width: "25px" }} />
+            <S.SettingsIcon />
           </S.IconButton>
           <S.ButtonsText>SETTINGS</S.ButtonsText>
         </S.ButtonContainer>
@@ -267,7 +299,9 @@ export const Account = () => {
           <S.IconButton>
             <S.PhotoCameraIconContainer>
               <S.PhotoCameraIcon fontSize="large" />
-              <S.PlusMedia className="plusMedia" />
+              <S.PlusMedia className="plusMedia">+</S.PlusMedia>
+
+              {/* <span>+</span> */}
             </S.PhotoCameraIconContainer>
           </S.IconButton>
           <S.ButtonsText>ADD MEDIA</S.ButtonsText>
@@ -275,9 +309,7 @@ export const Account = () => {
         <S.ButtonContainer>
           <S.IconButton>
             <S.ButtonBorder />
-            <S.VerifiedUserOutlinedIcon
-              style={{ height: "25px", width: "25px" }}
-            />
+            <S.VerifiedUserOutlinedIcon />
           </S.IconButton>
           <S.ButtonsText>SAFETY</S.ButtonsText>
         </S.ButtonContainer>
@@ -292,3 +324,5 @@ export const Account = () => {
     </S.AccountContainer>
   );
 };
+
+//FE2E79   FF6F59

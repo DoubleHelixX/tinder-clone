@@ -19,16 +19,14 @@ export const TinderCards = () => {
       firstName: "Aiony",
       lastName: "Haust",
       message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
-      url:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
       timestamp: "2 days ago",
     },
     {
       firstName: "Robert",
       lastName: "W",
       message: `I can give you lots of moneys 😉`,
-      url:
-        "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
       timestamp: "1 week ago",
     },
   ]);
@@ -42,22 +40,27 @@ export const TinderCards = () => {
     display: flex;
     justify-content: center;
     margin-top: 5vh;
+    height: 70vh;
+    min-height: auto;
+
+    padding: 0;
+    margin-bottom: 12vh;
   `;
 
   S.TinderCard = styled.div`
-    position: relative;
+    /* position: relative; */
     margin: auto;
     width: auto;
     max-width: auto;
     min-width: 85vw;
-    height: auto;
-    min-height: 50vh;
-    max-height: auto;
+    height: 75vh;
+    min-height: auto;
+    max-height: 90vh;
     padding: 20px;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 13px 0px rgba(0, 0, 0, 0.1);
   `;
   S.TinderCardSwipe = styled.div`
     position: absolute;
