@@ -3,7 +3,7 @@
 - create gif functioanlity (gif api??) and images
 - create view users profile functioanlity
 -  
-
+FIX HEADER BOX SHADOW ON PROFILE TAB
 
 photo tips:
 Don't forget to keep your photos fresh

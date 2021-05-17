@@ -24,8 +24,7 @@ const Header = () => {
     border-bottom: 1px solid #f9f9f9;
     box-shadow: 0px 4px 10px -4px hsl(0deg 0% 23% / 32%);
     align-items: center;
-    padding-left: 54px;
-    padding-right: 54px;
+    padding: 5px 54px;
   `;
 
   S.NavIcon = styled.div`
