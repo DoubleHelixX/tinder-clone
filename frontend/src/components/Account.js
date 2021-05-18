@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   spin,
   heartBeat,
@@ -7,6 +7,7 @@ import {
   slightRotate,
   bounce,
   jello,
+  shakeY,
 } from "../shared//keyframes";
 import styled from "styled-components";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
@@ -39,14 +40,17 @@ export const Account = () => {
     {
       title: "Like Profiles Around the World",
       description: "Passport™ To Any Location",
-      color: "1E4AAC",
+      color: "#1E4AAC",
       path: "M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z",
     },
     {
       title: "Control Your Profile",
       description: "Limit what others see about you",
-      color: "#FF7B2F",
-      path: "M20.4 12.182a3.809 3.809 0 1 1-7.613 0 3.809 3.809 0 1 1 7.617 0",
+      color1: "#FF7B2F",
+      color2: "#ffffff",
+      path1:
+        "M7.187 7A5.242 5.242 0 0 0 2 12.244a5.248 5.248 0 0 0 5.244 5.245h9.512A5.243 5.243 0 0 0 22 12.244 5.24 5.24 0 0 0 16.822 7H7.187z",
+      path2: "M20.4 12.182a3.809 3.809 0 1 1-7.613 0 3.809 3.809 0 1 1 7.617 0",
     },
     {
       title: "Unlimited Rewinds",
@@ -63,23 +67,33 @@ export const Account = () => {
   ]);
   const S = {};
   S.AccountContainer = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f5f7fa;
+    align-items: center; */
+    background: linear-gradient(
+      185deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(245, 247, 250, 1) 70%
+    );
     overflow: hidden;
+    height: 100vh;
+    /* border: 2px red solid; */
   `;
   S.ContentBody = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 60vh;
     box-shadow: 0 4px 10px -4px hsl(0deg 0% 53% / 28%);
     border-bottom-left-radius: 50% 60px;
     border-bottom-right-radius: 50% 60px;
     background-color: white;
     padding-bottom: 82px;
     margin-bottom: 5px;
+    min-height: 400px;
+    /* border: 2px red solid; */
+    margin-top: 15px;
   `;
   S.AvatarContainer = styled.div`
     display: block;
@@ -264,6 +278,7 @@ export const Account = () => {
   `;
   S.TipContainer = styled.div`
     display: flex;
+
     align-items: center;
     background: rgb(255, 117, 86);
     background: linear-gradient(87deg, #fd8f76 5%, #fb8297 49%, #fd669f 100%);
@@ -271,7 +286,10 @@ export const Account = () => {
     padding: 4px 8px;
     margin: 15px;
     width: 94.783vw;
-    margin-top: 90px;
+    margin-top: 10vh;
+    @media (max-height: 866px) {
+      display: none;
+    }
   `;
   S.Tip = styled.p`
     color: white;
@@ -285,6 +303,11 @@ export const Account = () => {
     color: white;
     padding: 0 0 0 15px;
     cursor: pointer;
+    &:hover {
+      animation-name: ${shakeY};
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in-out;
+    }
   `;
   S.PlusMedia = styled.div`
     background-color: white;
@@ -296,39 +319,46 @@ export const Account = () => {
     right: -5px;
     bottom: 0px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.52);
-    border: 2px inset rgba(254, 46, 121, 1);
+    border: 2px solid rgba(254, 46, 121, 1);
   `;
   S.AdContainer = styled.div`
-    background-color: #f5f7fa;
+    background-color: inherit;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    height: 200px;
+    width: 90%;
+    height: auto;
     padding: 0;
     margin: 0;
-    display: flex;
     position: relative;
     align-items: center;
     width: 90%;
     flex-direction: center;
-    border: 2px red solid;
+    /* border: 2px red solid; */
     font-weight: 500;
   `;
   S.AdTitleContents = styled.div`
     display: flex;
     align-items: center;
-    width: 50%;
+    justify-content: center;
+    vertical-align: middle;
+    width: 90%;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
+    /* border: 2px purple solid; */
   `;
   S.AdLogo = styled.svg`
-    height: 24px;
-    width: 24px;
+    height: 26px;
+    width: 28px;
     object-fit: contain;
+    padding-right: 8px;
+    padding-bottom: ${(props) => props.paddingBottom};
+
+    /* border: red 2px solid; */
 
     & > path {
-      fill: url("#gradient");
+      fill: ${(props) =>
+        props.index === 0 ? 'url("#gradient")!important ' : ""};
       fill-rule: "nonzero";
     }
   `;
@@ -336,6 +366,9 @@ export const Account = () => {
   S.AdTitle = styled.h3`
     font-family: Arial, sans-serif;
     color: #1f1f1f;
+    padding: 0;
+    margin: 0;
+    /* border: red 2px solid; */
   `;
   S.AdDescription = styled.p`
     color: #1f1f1f;
@@ -345,46 +378,59 @@ export const Account = () => {
     margin: 0 auto;
     overflow: hidden;
     max-width: 450px;
-    border: 2px blue solid;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 2px blue solid; */
   `;
   S.SlideshowSlider = styled.div`
     white-space: nowrap;
     transition: ease 1000ms;
-    border: 2px green solid;
+    /* border: 2px green solid; */
   `;
   S.Slide = styled.div`
     display: inline-block;
 
-    height: 400px;
+    height: auto;
     width: 100%;
     border-radius: 40px;
-    border: 2px yellow solid;
+    border: 2px inherit solid;
   `;
   S.SlideshowDots = styled.div`
     text-align: center;
-    border: 2px black solid;
+    width: inherit;
+    border: 2px inherit solid;
+    margin-right: 38px;
   `;
   S.SlideshowDot = styled.div`
     display: inline-block;
-    height: 20px;
-    width: 20px;
+    height: 8px;
+    width: 8px;
     border-radius: 50%;
 
     cursor: pointer;
-    margin: 15px 7px 0px;
+    margin: 15px 3px 0px;
 
     background-color: #c4c4c4;
   `;
 
-  S.SlideshowDotActive = styled.div`
+  S.SlideshowDotActive = styled.span`
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+
+    cursor: pointer;
+    margin: 15px 3px 0px;
     background-color: ${(props) =>
       props.backgroundColor ? props.backgroundColor : "#000000"};
   `;
 
-  const delay = 2700;
+  const delay = 1800;
 
-  const [index, setIndex] = React.useState(0);
-  const timeoutRef = React.useRef(null);
+  const [index, setIndex] = useState(0);
+  const timeoutRef = useRef(null);
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -392,7 +438,7 @@ export const Account = () => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(
       () =>
@@ -460,21 +506,23 @@ export const Account = () => {
         </S.TipContainer>
       </S.ContentBody>
 
-      <S.AdContainer>
-        <S.Slideshow>
-          <S.SlideshowSlider
-            style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-          >
-            {ads.map((ad, index) => (
-              <S.Slide key={index}>
+      <S.Slideshow>
+        <S.SlideshowSlider
+          style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+        >
+          {ads.map((ad, index) => (
+            <S.Slide key={index}>
+              <S.AdContainer>
                 <S.AdTitleContents>
                   <S.AdLogo
                     viewBox="0 0 24 24"
                     focusable="false"
                     aria-hidden="true"
                     role="presentation"
+                    paddingBottom={index === 3 ? "0px" : "5px"}
+                    index={index}
                   >
-                    {/* <defs>
+                    <defs>
                       <linearGradient
                         id="gradient"
                         x1="10%"
@@ -483,40 +531,47 @@ export const Account = () => {
                         y2="40%"
                       >
                         <stop offset="15%" stop-color="#616161" />
-                        <stop offset="95%" stop-color={ad.color} />
+                        <stop offset="95%" stop-color="#1f1f1f" />
                       </linearGradient>
-                    </defs> */}
-                    <path fill={ad.color} d={ad.path}></path>
+                    </defs>
+                    {ad.path1 ? (
+                      <g fill="none">
+                        <path fill={ad.color1} d={ad.path1}></path>
+                        <path fill={ad.color2} d={ad.path2}></path>
+                      </g>
+                    ) : (
+                      <path fill={ad.color} d={ad.path}></path>
+                    )}
                   </S.AdLogo>
                   <S.AdTitle>{ad.title}</S.AdTitle>
                 </S.AdTitleContents>
                 <S.AdDescription>{ad.description}</S.AdDescription>
-              </S.Slide>
-            ))}
-          </S.SlideshowSlider>
+              </S.AdContainer>
+            </S.Slide>
+          ))}
+        </S.SlideshowSlider>
 
-          <S.SlideshowDots>
-            {ads.map((ad, idx) =>
-              index === idx ? (
-                <S.SlideshowDotActive
-                  key={idx}
-                  backgroundColor={ad.color}
-                  onClick={() => {
-                    setIndex(idx);
-                  }}
-                ></S.SlideshowDotActive>
-              ) : (
-                <S.SlideshowDot
-                  key={idx}
-                  onClick={() => {
-                    setIndex(idx);
-                  }}
-                ></S.SlideshowDot>
-              )
-            )}
-          </S.SlideshowDots>
-        </S.Slideshow>
-      </S.AdContainer>
+        <S.SlideshowDots>
+          {ads.map((ad, idx) =>
+            index === idx ? (
+              <S.SlideshowDotActive
+                key={idx}
+                backgroundColor={ad.color ? ad.color : ad.color1}
+                onClick={() => {
+                  setIndex(idx);
+                }}
+              ></S.SlideshowDotActive>
+            ) : (
+              <S.SlideshowDot
+                key={idx}
+                onClick={() => {
+                  setIndex(idx);
+                }}
+              ></S.SlideshowDot>
+            )
+          )}
+        </S.SlideshowDots>
+      </S.Slideshow>
     </S.AccountContainer>
   );
 };
