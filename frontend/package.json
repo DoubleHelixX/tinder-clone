@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "animate.css": "^4.1.1",
     "react": "^17.0.2",
+    "react-butterfiles": "^1.3.3",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -53,5 +54,4 @@
     "transform-class-properties",
     "styled-components"
   ]
-
 }
