@@ -17,6 +17,7 @@ import { Chatscreen } from "./ChatScreen";
 import { Account } from "./Account";
 
 import { contextTheme } from "../shared/_Constants";
+import { UploadImage } from "./UploadImage";
 
 const App = () => {
   const S = {};
@@ -54,6 +55,9 @@ const App = () => {
             <contextTheme.Provider value="gold">
               <Header />
             </contextTheme.Provider>
+          </Route>
+          <Route exact path="/account/media">
+            <UploadImage />
           </Route>
           <Route exact path="/">
             <contextTheme.Provider value="home">
