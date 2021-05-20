@@ -40,7 +40,7 @@ export const TinderCards = () => {
     display: flex;
     justify-content: center;
     margin-top: 5vh;
-    height: 70vh;
+    height: 65vh;
     min-height: auto;
 
     padding: 0;
@@ -53,7 +53,7 @@ export const TinderCards = () => {
     width: auto;
     max-width: auto;
     min-width: 85vw;
-    height: 75vh;
+    height: 65vh;
     min-height: auto;
     max-height: 90vh;
     padding: 20px;
