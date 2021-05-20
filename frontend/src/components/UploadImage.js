@@ -3,17 +3,117 @@ import Files from "react-butterfiles";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import { bounce } from "../shared//keyframes";
+import { bounce, rubberBand, shakeX } from "../shared//keyframes";
 import PublishIcon from "@material-ui/icons/Publish";
+import CloudDoneIcon from "@material-ui/icons/CloudDone";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 
+import { Link, useHistory } from "react-router-dom";
+
+import "../index.css";
 export const UploadImage = () => {
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
   const S = {};
   S.UploadImageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
   `;
+  S.IconButton = styled(IconButton)`
+    &:nth-child(1) {
+      position: absolute !important;
+      right: 55px;
+      top: 5px;
+      &:hover {
+        animation-name: ${rubberBand};
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+      }
+      ${!images.length &&
+      ` 
+        display: none;
+      `};
+    }
+    &:nth-child(2) {
+      position: absolute !important;
+      right: 5px;
+      top: 5px;
+      &:hover {
+        animation-name: ${shakeX};
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+      }
+    }
+  `;
+  S.CloudDoneIcon = styled(CloudDoneIcon)`
+    color: #1976d2;
+    /* border: 2px solid red; */
+  `;
+  S.CloseIcon = styled(CloseIcon)`
+    color: #5c5c5c;
+    stroke: #5c5c5c;
+
+    /* border: 2px solid red; */
+  `;
+  S.HeaderTitle = styled.h2`
+    padding: 20px 20px 10px 20px;
+    color: #fb3333;
+    font-family: "Montserrat", sans-serif;
+    /* border: 2px solid red; */
+  `;
+  S.HeaderDescription = styled.p`
+    padding: 0px 20px 20px 20px;
+    font-size: 15px;
+    color: #616180;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    /* border: 2px solid red; */
+  `;
+  S.CardTextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 52px 20px 0px 20px;
+    font-family: "Montserrat", sans-serif;
+    /* border: 2px solid red; */
+  `;
+  S.CardTitle = styled.h2`
+    font-family: "Montserrat", sans-serif;
+    color: white;
+
+    /* border: 2px solid red; */
+  `;
+  S.CardDescription = styled.p`
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    color: white;
+    margin-left: 5px;
+    margin-bottom: 2px;
+    /* border: 2px solid red; */
+  `;
+  S.CardContainer = styled.div`
+    background-image: ${(props) =>
+      props.backgroundImage ? props.backgroundImage : "none"};
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 95%;
+    height: 146px;
+    max-height: 146px;
+    margin: auto;
+    /* border: 2px groove inherit; */
+    padding-bottom: 5px;
+    margin: ${(props) => (props.margin ? props.margin : "auto")};
+    background-position: center;
+    height: 10vh;
+    min-height: 150px;
+    border-radius: 30px;
+    max-width: 800px;
+
+    /* border: 2px solid red; */
+  `;
+
   S.UploadArea = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,6 +123,8 @@ export const UploadImage = () => {
     display: flex;
     flex: 0.95;
     background: rgba(245, 247, 250, 0.5) !important;
+    border-bottom: 2px gray dashed;
+    border-radius: 20px;
 
     /* border: 2px solid red; */
   `;
@@ -128,11 +230,12 @@ export const UploadImage = () => {
       width: "95%",
       margin: "auto",
       height: "10vh",
+      maxWidth: 800,
       minHeight: 150,
       maxHeight: 200,
-      border: "2px #000000 dashed",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255,255,255,0.22)",
+      // border: "2px #ff5765 groove",
+      borderRadius: "30px",
+      backgroundColor: "rgba(255,255,255,0.15)",
       backgroundBlendMode: "lighten",
       backgroundImage:
         'url("https://tinder.com/static/build/33f6a9cb003d5e11ea46d1d91c8e442d.webp")',
@@ -143,14 +246,38 @@ export const UploadImage = () => {
   };
   return (
     <S.UploadImageContainer>
-      <h3>Media</h3>
+      <S.HeaderTitle>
+        Create New
+        <S.IconButton>
+          <S.CloudDoneIcon onClick={() => history.push("/account")} />
+        </S.IconButton>
+        <S.IconButton onClick={() => history.push("/account")}>
+          <S.CloseIcon />
+        </S.IconButton>
+      </S.HeaderTitle>
+      <S.HeaderDescription>Select a content type</S.HeaderDescription>
+      <S.CardContainer
+        margin="auto auto 20px auto"
+        backgroundImage='url("https://tinder.com/static/build/b4a07652e7db8c8679929ab89b94881b.webp");'
+      >
+        <S.CardTextContainer>
+          <S.CardDescription>Create a new</S.CardDescription>
+          <S.CardTitle>Prompt</S.CardTitle>{" "}
+        </S.CardTextContainer>
+      </S.CardContainer>
       <Files
         multiple={true}
         maxSize="2mb"
         multipleMaxSize="10mb"
         accept={["image/png", "image/jpg", "image/jpeg"]}
-        onSuccess={(files) => setImages([...images, ...files])}
-        onError={(e) => setErrors([...errors, ...e])}
+        onSuccess={(files) => {
+          let fileArry = [...files, ...images];
+          setImages(fileArry.slice(0, 5));
+        }}
+        onError={(e) => {
+          let errArry = [...e, ...errors];
+          setErrors(errArry.slice(0, 5));
+        }}
         multipleMaxCount={5}
         convertToBase64={true}
       >
@@ -159,7 +286,7 @@ export const UploadImage = () => {
             <S.UploadArea {...getDropZoneProps(UPLOAD_AREA_STYLE_PROP)}>
               <S.FilesData>
                 <S.FilesListContainer>
-                  {images.map((file) => (
+                  {images.map((file, index) => (
                     <S.FileList key={file.name}>
                       <S.ImageName>
                         {`${
@@ -217,6 +344,16 @@ export const UploadImage = () => {
           );
         }}
       </Files>
+      <S.CardContainer
+        margin="20px auto auto auto"
+        backgroundImage='url("https://tinder.com/static/build/a07b4f45f6f40b94d21568fc8c46f99d.webp")'
+      >
+        {" "}
+        <S.CardTextContainer>
+          <S.CardDescription>Capture from</S.CardDescription>
+          <S.CardTitle>Camera</S.CardTitle>{" "}
+        </S.CardTextContainer>
+      </S.CardContainer>
     </S.UploadImageContainer>
   );
 };
