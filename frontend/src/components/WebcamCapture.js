@@ -100,6 +100,9 @@ export const WebcamCapture = () => {
       border: white 10px double;
       /* background-color: lightgray; */
     }
+    @media (min-width: 532px) {
+      left: 48vw;
+    }
   `;
 
   return (
