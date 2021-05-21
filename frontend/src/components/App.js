@@ -18,6 +18,8 @@ import { Account } from "./Account";
 
 import { contextTheme } from "../shared/_Constants";
 import { UploadImage } from "./UploadImage";
+import { EditAccount } from "./EditAccount";
+import { WebcamCapture } from "./WebcamCapture";
 
 const App = () => {
   const S = {};
@@ -56,9 +58,16 @@ const App = () => {
               <Header />
             </contextTheme.Provider>
           </Route>
+          <Route exact path="/account/media/camera">
+            <WebcamCapture />
+          </Route>
           <Route exact path="/account/media">
             <UploadImage />
           </Route>
+          <Route exact path="/account/edit">
+            <EditAccount />
+          </Route>
+
           <Route exact path="/">
             <contextTheme.Provider value="home">
               <Header />

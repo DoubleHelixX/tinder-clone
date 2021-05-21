@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Files from "react-butterfiles";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { bounce, rubberBand, shakeX } from "../shared//keyframes";
@@ -8,6 +8,9 @@ import PublishIcon from "@material-ui/icons/Publish";
 import CloudDoneIcon from "@material-ui/icons/CloudDone";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import DoubleArrowSharpIcon from "@material-ui/icons/DoubleArrowSharp";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -15,11 +18,15 @@ import "../index.css";
 export const UploadImage = () => {
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
+
   const history = useHistory();
   const S = {};
   S.UploadImageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    & a {
+      text-decoration: none;
+    }
     /* align-items: center; */
   `;
   S.IconButton = styled(IconButton)`
@@ -58,6 +65,7 @@ export const UploadImage = () => {
 
     /* border: 2px solid red; */
   `;
+
   S.HeaderTitle = styled.h2`
     padding: 20px 20px 10px 20px;
     color: #fb3333;
@@ -75,14 +83,29 @@ export const UploadImage = () => {
   S.CardTextContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 52px 20px 0px 20px;
+    position: relative;
+    padding: 52px 20px 0px 20px;
     font-family: "Montserrat", sans-serif;
+
     /* border: 2px solid red; */
   `;
   S.CardTitle = styled.h2`
     font-family: "Montserrat", sans-serif;
     color: white;
-
+    /* border: 2px solid red; */
+  `;
+  S.ComingSoon = styled.h2`
+    font-family: "Montserrat", sans-serif;
+    display: none;
+    color: black;
+    width: 70%;
+    margin: auto;
+    color: white;
+    text-shadow: 0 1px 0 #000000, 0 2px 0 #000000, 0 3px 0 #000000,
+      0 4px 0 #000000, 0 5px 0 #000000, 0 6px 1px rgba(0, 0, 0, 0.1),
+      0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
+      0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
     /* border: 2px solid red; */
   `;
   S.CardDescription = styled.p`
@@ -93,20 +116,32 @@ export const UploadImage = () => {
     margin-bottom: 2px;
     /* border: 2px solid red; */
   `;
+  S.Link = styled(Link)`
+    height: auto;
+    margin: ${(props) => (props.margin ? props.margin : "auto")};
+    width: 95%;
+    max-width: 800px;
+    min-height: 150px;
+    height: 10vh;
+    border-radius: 30px;
+    /* pointer-events: ${(props) => (props.pointer ? props.pointer : "")}; */
+    &:hover ${S.ComingSoon} {
+      display: block;
+    }
+
+    /* border: red solid 2px; */
+  `;
   S.CardContainer = styled.div`
     background-image: ${(props) =>
       props.backgroundImage ? props.backgroundImage : "none"};
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 95%;
-    height: 146px;
-    max-height: 146px;
+    width: 100%;
     margin: auto;
     /* border: 2px groove inherit; */
-    padding-bottom: 5px;
     margin: ${(props) => (props.margin ? props.margin : "auto")};
     background-position: center;
-    height: 10vh;
+    /* height: 10vh; */
     min-height: 150px;
     border-radius: 30px;
     max-width: 800px;
@@ -121,6 +156,7 @@ export const UploadImage = () => {
   `;
   S.FilesData = styled.ol`
     display: flex;
+    position: relative;
     flex: 0.95;
     background: rgba(245, 247, 250, 0.5) !important;
     border-bottom: 2px gray dashed;
@@ -191,8 +227,8 @@ export const UploadImage = () => {
     display: flex;
     justify-content: center;
     width: 95%;
-    height: 40px;
-    padding-top: 5px;
+    height: 46px;
+    /* padding-top: 5px; */
     /* border: 2px red solid; */
   `;
   S.CloudUploadIcon = styled(CloudUploadIcon)``;
@@ -201,10 +237,20 @@ export const UploadImage = () => {
     stroke: #ffffff !important;
   `;
 
+  S.DoubleArrowSharpIcon = styled(DoubleArrowSharpIcon)`
+    color: #1976d2 !important;
+    stroke: #ffffff !important;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  `;
+
   S.UploadImagesButton = styled(Button)`
     text-align: center;
     color: white !important;
     width: 120px;
+    height: 38px;
+    margin-top: 5px !important;
     background-color: #2180e8 !important;
 
     &:hover ${S.CloudUploadIcon} {
@@ -213,18 +259,43 @@ export const UploadImage = () => {
       animation-timing-function: ease-in-out;
     }
   `;
-  S.UploadImagesHint = styled.span`
+
+  S.UploadImagesHintContainer = styled.span`
     display: flex;
-    flex: 1;
+    flex-direction: column;
     align-items: center;
-    padding: 8px;
-    font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
+    padding: ${(props) => (props.padding ? props.padding : "0px")};
+    padding-top: 2px;
     font-weight: bolder;
+    position: relative;
+
+    /* border: 2px blue solid; */
+  `;
+  S.UploadImagesHint = styled.p`
+    display: flex;
+    display: ${(props) =>
+      props.display && images.length ? props.display : "flex"};
+    width: ${(props) => (props.width ? props.width : "")};
+    justify-content: center;
+    padding: 0;
     color: #ffffff;
+    -webkit-text-stroke: ${(props) => (props.stroke ? props.stroke : "")};
+    margin: ${(props) => (props.margin ? props.margin : "auto 5px auto 10px")};
+    position: ${(props) => (props.position ? props.position : "")};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
     text-shadow: 2px 2px 0 #2180e8, 2px -2px 0 #2180e8, -2px 2px 0 #2180e8,
       -2px -2px 0 #2180e8, 2px 0px 0 #2180e8, 0px 2px 0 #2180e8,
       -2px 0px 0 #2180e8, 0px -2px 0 #2180e8;
+    /* border: 2px red solid; */
   `;
+  const tipArry = [
+    "Don't forget to keep your photos fresh",
+    "Not everyone appreciates only gym photos",
+    "Some people want to see you smile",
+    "You have 9 shots at a first impression",
+    "try to keep your tongue in your mouth",
+    "Keep the kids out of frame",
+  ];
   const UPLOAD_AREA_STYLE_PROP = {
     style: {
       width: "95%",
@@ -244,6 +315,7 @@ export const UploadImage = () => {
       backgroundPosition: "center",
     },
   };
+
   return (
     <S.UploadImageContainer>
       <S.HeaderTitle>
@@ -256,15 +328,15 @@ export const UploadImage = () => {
         </S.IconButton>
       </S.HeaderTitle>
       <S.HeaderDescription>Select a content type</S.HeaderDescription>
-      <S.CardContainer
-        margin="auto auto 20px auto"
-        backgroundImage='url("https://tinder.com/static/build/b4a07652e7db8c8679929ab89b94881b.webp");'
-      >
-        <S.CardTextContainer>
-          <S.CardDescription>Create a new</S.CardDescription>
-          <S.CardTitle>Prompt</S.CardTitle>{" "}
-        </S.CardTextContainer>
-      </S.CardContainer>
+      <S.Link pointer="none" margin="auto auto 20px auto">
+        <S.CardContainer backgroundImage='url("https://tinder.com/static/build/b4a07652e7db8c8679929ab89b94881b.webp");'>
+          <S.CardTextContainer>
+            <S.CardDescription>Create a new</S.CardDescription>
+            <S.CardTitle>Prompt</S.CardTitle>
+            <S.ComingSoon>COMING SOON . . MAYBE</S.ComingSoon>
+          </S.CardTextContainer>
+        </S.CardContainer>
+      </S.Link>
       <Files
         multiple={true}
         maxSize="2mb"
@@ -301,6 +373,17 @@ export const UploadImage = () => {
                     </S.FileList>
                   ))}
                 </S.FilesListContainer>
+                <S.UploadImagesHint
+                  fontSize="18px"
+                  margin="50px auto auto auto"
+                  position="absolute"
+                  stroke="1.5px #ffffff"
+                  width="87%"
+                  display="none"
+                >
+                  Drag and Drop
+                  <S.PublishIcon />
+                </S.UploadImagesHint>
                 <S.ErrorsListContainer>
                   {errors.map((error) => (
                     <S.ErrorList key={error.id}>
@@ -324,9 +407,11 @@ export const UploadImage = () => {
                 </S.ErrorsListContainer>
               </S.FilesData>
               <S.UploadImagesContainer>
-                <S.UploadImagesHint>
-                  Drag and Drop <S.PublishIcon />
-                </S.UploadImagesHint>
+                <S.UploadImagesHintContainer>
+                  <S.UploadImagesHint>
+                    OR Upload <S.DoubleArrowSharpIcon />
+                  </S.UploadImagesHint>
+                </S.UploadImagesHintContainer>
 
                 <S.UploadImagesButton
                   variant="contained"
@@ -336,24 +421,24 @@ export const UploadImage = () => {
                 >
                   Upload
                 </S.UploadImagesButton>
-                <S.UploadImagesHint fontSize="14px">
-                  Upload Limit: {images.length} / 5
-                </S.UploadImagesHint>
+                <S.UploadImagesHintContainer>
+                  <S.UploadImagesHint fontSize="14px" margin="20px 0 0 10px">
+                    Upload Limit: {images.length} / 5
+                  </S.UploadImagesHint>
+                </S.UploadImagesHintContainer>
               </S.UploadImagesContainer>
             </S.UploadArea>
           );
         }}
       </Files>
-      <S.CardContainer
-        margin="20px auto auto auto"
-        backgroundImage='url("https://tinder.com/static/build/a07b4f45f6f40b94d21568fc8c46f99d.webp")'
-      >
-        {" "}
-        <S.CardTextContainer>
-          <S.CardDescription>Capture from</S.CardDescription>
-          <S.CardTitle>Camera</S.CardTitle>{" "}
-        </S.CardTextContainer>
-      </S.CardContainer>
+      <S.Link margin="20px auto auto auto" to="/account/media/camera">
+        <S.CardContainer backgroundImage='url("https://tinder.com/static/build/a07b4f45f6f40b94d21568fc8c46f99d.webp")'>
+          <S.CardTextContainer>
+            <S.CardDescription>Capture from</S.CardDescription>
+            <S.CardTitle>Camera</S.CardTitle>
+          </S.CardTextContainer>
+        </S.CardContainer>
+      </S.Link>
     </S.UploadImageContainer>
   );
 };

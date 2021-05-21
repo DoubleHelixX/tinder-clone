@@ -9,3 +9,30 @@ photo tips:
 Don't forget to keep your photos fresh
 Not everyone appreciates only gym photos
 Some people want to see you smile
+You have 9 shots at a first impression
+try to keep your tongue in your mouth
+Keep the kids out of frame
+
+
+
+
+: (
+            [
+              index === 6 ? (
+                <S.SlideshowDotActive
+                  key={0}
+                  backgroundColor={ads[0].color ? ads[0].color : ads[0].color1}
+                  onClick={() => {
+                    setIndex(0);
+                  }}
+                ></S.SlideshowDotActive>
+              ) : (
+                <S.SlideshowDot
+                  key={idx}
+                  onClick={() => {
+                    setIndex(idx);
+                  }}
+                ></S.SlideshowDot>
+              ),
+            ]
+          )

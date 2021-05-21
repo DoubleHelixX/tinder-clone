@@ -74,7 +74,7 @@ export const SlideshowAds = () => {
     margin-right: 38px;
   `;
   S.SlideshowDot = styled.div`
-    display: inline-block;
+    display: ${(props) => (props.display ? props.display : "inline-block")};
     height: 8px;
     width: 8px;
     border-radius: 50%;
@@ -162,15 +162,21 @@ export const SlideshowAds = () => {
 
   useEffect(() => {
     resetTimeout();
-    timeoutRef.current = setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === ads.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
+    if (index < 5) {
+      timeoutRef.current = setTimeout(
+        () =>
+          setIndex((prevIndex) => {
+            if (prevIndex === ads.length - 1) {
+              return 0;
+            }
+            return prevIndex + 1;
+          }),
+        delay
+      );
+    } else setTimeout(() => setIndex(() => 6), delay);
 
     return () => {
+      console.log("index", index);
       resetTimeout();
     };
   }, [index]);
@@ -179,8 +185,8 @@ export const SlideshowAds = () => {
       <S.SlideshowSlider
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
-        {ads.map((ad, index) => (
-          <S.Slide key={index}>
+        {ads.map((ad, idx) => (
+          <S.Slide key={idx}>
             <S.AdContainer>
               <S.AdTitleContents>
                 <S.AdLogo
@@ -188,8 +194,8 @@ export const SlideshowAds = () => {
                   focusable="false"
                   aria-hidden="true"
                   role="presentation"
-                  paddingBottom={index === 3 ? "0px" : "5px"}
-                  index={index}
+                  paddingBottom={idx === 3 ? "0px" : "5px"}
+                  index={idx}
                 >
                   <defs>
                     <linearGradient
@@ -218,9 +224,51 @@ export const SlideshowAds = () => {
             </S.AdContainer>
           </S.Slide>
         ))}
+        {index === 6 && (
+          <S.Slide key={0}>
+            <S.AdContainer>
+              <S.AdTitleContents>
+                <S.AdLogo
+                  viewBox="0 0 24 24"
+                  focusable="false"
+                  aria-hidden="true"
+                  role="presentation"
+                  paddingBottom="5px"
+                  index={0}
+                >
+                  <defs>
+                    <linearGradient
+                      id="gradient"
+                      x1="10%"
+                      y1="90%"
+                      x2="60%"
+                      y2="40%"
+                    >
+                      <stop offset="15%" stop-color="#616161" />
+                      <stop offset="95%" stop-color="#1f1f1f" />
+                    </linearGradient>
+                  </defs>
+
+                  <path fill={ads[0].color} d={ads[0].path}></path>
+                </S.AdLogo>
+                <S.AdTitle>{ads[0].title}</S.AdTitle>
+              </S.AdTitleContents>
+              <S.AdDescription>{ads[0].description}</S.AdDescription>
+            </S.AdContainer>
+          </S.Slide>
+        )}
       </S.SlideshowSlider>
 
       <S.SlideshowDots>
+        {index === 6 && (
+          <S.SlideshowDotActive
+            key={0}
+            backgroundColor={ads[0].color ? ads[0].color : ads[0].color1}
+            onClick={() => {
+              setIndex(0);
+            }}
+          ></S.SlideshowDotActive>
+        )}
         {ads.map((ad, idx) =>
           index === idx ? (
             <S.SlideshowDotActive
@@ -233,8 +281,9 @@ export const SlideshowAds = () => {
           ) : (
             <S.SlideshowDot
               key={idx}
+              display={index === 6 && idx === 5 ? "none" : ""}
               onClick={() => {
-                setIndex(idx);
+                setIndex(idx + 1);
               }}
             ></S.SlideshowDot>
           )
