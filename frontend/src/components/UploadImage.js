@@ -157,10 +157,12 @@ export const UploadImage = () => {
   S.FilesData = styled.ol`
     display: flex;
     position: relative;
+
     flex: 0.95;
     background: rgba(245, 247, 250, 0.5) !important;
     border-bottom: 2px gray dashed;
     border-radius: 20px;
+    padding: 0px;
 
     /* border: 2px solid red; */
   `;
@@ -272,15 +274,20 @@ export const UploadImage = () => {
     /* border: 2px blue solid; */
   `;
   S.UploadImagesHint = styled.p`
-    display: flex;
     display: ${(props) =>
       props.display && images.length ? props.display : "flex"};
-    width: ${(props) => (props.width ? props.width : "")};
+    width: ${(props) => (props.width ? props.width : "auto")};
+    flex-direction: ${(props) =>
+      props.flexDirection ? props.flexDirection : ""};
+    top: ${(props) => (props.top ? props.top : "")};
+
+    left: ${(props) => (props.left ? props.left : "")};
     justify-content: center;
+    align-items: center;
     padding: 0;
     color: #ffffff;
     -webkit-text-stroke: ${(props) => (props.stroke ? props.stroke : "")};
-    margin: ${(props) => (props.margin ? props.margin : "auto 5px auto 10px")};
+    margin: ${(props) => (props.margin ? props.margin : "auto 10px auto 45px")};
     position: ${(props) => (props.position ? props.position : "")};
     font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
     text-shadow: 2px 2px 0 #2180e8, 2px -2px 0 #2180e8, -2px 2px 0 #2180e8,
@@ -288,14 +295,7 @@ export const UploadImage = () => {
       -2px 0px 0 #2180e8, 0px -2px 0 #2180e8;
     /* border: 2px red solid; */
   `;
-  const tipArry = [
-    "Don't forget to keep your photos fresh",
-    "Not everyone appreciates only gym photos",
-    "Some people want to see you smile",
-    "You have 9 shots at a first impression",
-    "try to keep your tongue in your mouth",
-    "Keep the kids out of frame",
-  ];
+
   const UPLOAD_AREA_STYLE_PROP = {
     style: {
       width: "95%",
@@ -341,7 +341,7 @@ export const UploadImage = () => {
         multiple={true}
         maxSize="2mb"
         multipleMaxSize="10mb"
-        accept={["image/png", "image/jpg", "image/jpeg"]}
+        accept={["image/png", "image/jpg", "image/jpeg", "image/gif"]}
         onSuccess={(files) => {
           let fileArry = [...files, ...images];
           setImages(fileArry.slice(0, 5));
@@ -375,11 +375,14 @@ export const UploadImage = () => {
                 </S.FilesListContainer>
                 <S.UploadImagesHint
                   fontSize="18px"
-                  margin="50px auto auto auto"
                   position="absolute"
                   stroke="1.5px #ffffff"
-                  width="87%"
+                  width="100%"
                   display="none"
+                  flexDirection="column"
+                  left="0vw"
+                  top="6vh"
+                  margin="auto"
                 >
                   Drag and Drop
                   <S.PublishIcon />

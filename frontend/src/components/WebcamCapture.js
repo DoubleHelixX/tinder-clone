@@ -33,10 +33,9 @@ export const WebcamCapture = () => {
   S.WebcamCaptureContainer = styled.div`
     display: block;
     overflow: hidden;
-    & .cloudIcon:hover {
-      animation-name: ${bounce};
-      animation-duration: 0.9s;
-      animation-timing-function: ease-in-out;
+    & .cloudIcon:hover ${S.CloudDoneIcon} {
+      fill: #1976d2;
+      stroke: white;
     }
 
     /* border: 2px red solid; */
@@ -86,7 +85,7 @@ export const WebcamCapture = () => {
     font-size: 30px;
     position: absolute;
     bottom: 50px;
-    left: 42vw;
+    left: 41vw;
     border-radius: 50px;
     padding: 10px;
     background-color: #5c5c5c;
@@ -101,7 +100,7 @@ export const WebcamCapture = () => {
       /* background-color: lightgray; */
     }
     @media (min-width: 532px) {
-      left: 48vw;
+      left: 47vw;
     }
   `;
 

@@ -25,6 +25,16 @@ import { Link } from "react-router-dom";
 import "../index.css";
 
 export const Account = () => {
+  const tipArry = [
+    "Don't forget to keep your photos fresh",
+    "Not everyone appreciates only gym photos",
+    "Some people want to see you smile",
+    "You have 9 shots at a first impression",
+    "Try to keep your tongue in your mouth",
+    "Keep the kids out of frame",
+    "Get off your motocycle",
+  ];
+  const randomNumber = Math.floor(Math.random() * tipArry.length);
   const S = {};
   S.AccountContainer = styled.div`
     /* display: flex;
@@ -387,7 +397,7 @@ export const Account = () => {
         </S.ButtonsContainer>
 
         <S.TipContainer>
-          <S.Tip>Photo Tip: Try to keep your tongue in your mouth</S.Tip>
+          <S.Tip>Photo Tip: {tipArry[randomNumber]}</S.Tip>
           <Link to="/account/media">
             <S.Plus fontSize="large" />
           </Link>
