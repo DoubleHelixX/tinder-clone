@@ -11,6 +11,7 @@ export const EditAccount = () => {
   S.EditAccountContainer = styled.div`
     display: flex;
     flex-direction: column;
+    background-color: #f5f7fa;
   `;
   S.Header = styled.div`
     display: flex;
@@ -21,6 +22,7 @@ export const EditAccount = () => {
     padding-left: 10px;
     border-bottom: 1px solid #f9f9f9;
     box-shadow: 0px 4px 10px -4px hsl(0deg 0% 23% / 32%);
+    background-color: #ffffff;
 
     /* border: 2px red solid; */
   `;

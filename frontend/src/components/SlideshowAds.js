@@ -47,7 +47,7 @@ export const SlideshowAds = () => {
   S.Slideshow = styled.div`
     margin: 0 auto;
     overflow: hidden;
-    max-width: 450px;
+    max-width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ export const SlideshowAds = () => {
     text-align: center;
     width: inherit;
     border: 2px inherit solid;
-    margin-right: 38px;
+    /* margin-right: 38px; */
   `;
   S.SlideshowDot = styled.div`
     display: ${(props) => (props.display ? props.display : "inline-block")};
@@ -100,13 +100,13 @@ export const SlideshowAds = () => {
     background-color: inherit;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     height: auto;
     padding: 0;
     margin: 0;
     position: relative;
     align-items: center;
-    width: 90%;
+    width: 100%;
     flex-direction: center;
     /* border: 2px red solid; */
     font-weight: 500;
@@ -116,7 +116,7 @@ export const SlideshowAds = () => {
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    width: 90%;
+    width: 100%;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;

@@ -12,6 +12,15 @@ import {
 } from "../shared//keyframes";
 import "../index.css";
 import "array.prototype.move";
+import nel from "../images/nel.png";
+import nel2 from "../images/nel2.jpg";
+import nel3 from "../images/nel3.jpg";
+import nel4 from "../images/nel4.jpg";
+import nel5 from "../images/nel5.jpg";
+import nel6 from "../images/nel6.jpg";
+import nel7 from "../images/nel7.png";
+import nel8 from "../images/nel8.jpg";
+import nel9 from "../images/nel9.png";
 
 import Reorder, {
   reorder,
@@ -27,54 +36,64 @@ export const EditPhotos = () => {
   const [photos, setPhotos] = useState([
     {
       id: 0,
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+
+      url: nel,
     },
     {
       id: 1,
 
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      url: nel2,
     },
     {
       id: 2,
 
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: nel3,
     },
     {
       id: 3,
 
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      url: nel4,
     },
     {
       id: 4,
 
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: nel5,
     },
     {
       id: 5,
 
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      url: nel6,
     },
     {
       id: 6,
 
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: nel7,
     },
     {
       id: 7,
 
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      url: nel8,
     },
     {
       id: 8,
 
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: nel9,
     },
+    // {
+    //   id: 9,
+    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    // },
   ]);
 
   const OnReorder = useCallback(
     (event, previousIndex, nextIndex, fromId, toId) => {
       console.log("ayyyo", event, previousIndex, nextIndex);
-      if (nextIndex < photos.length)
+      if (
+        nextIndex < photos.length &&
+        nextIndex !== 8 &&
+        previousIndex !== 8 &&
+        photos.length <= 9
+      )
         setPhotos([...photos.move(previousIndex, nextIndex)]);
       console.log("here", fromId, toId);
     },
@@ -84,23 +103,26 @@ export const EditPhotos = () => {
   const S = {};
 
   S.CardContainer = styled.div`
-    margin-top: 5px;
-    padding: 4px;
-    background-color: #f5f7fa;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    position: relative;
+    padding: 4px;
+
+    flex-direction: column;
+    max-width: 500px;
+    margin: auto;
+    background-color: #f5f7fa;
+    margin-top: 5px;
+
     /* border: 2px red solid; */
   `;
   S.Reorder = styled(Reorder)`
-    margin-top: 5px;
+    /* margin-top: 5px; */
     padding: 4px;
     background-color: #f5f7fa;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     position: relative;
+    border-radius: 8px;
 
     /* & .dragged {
       background-color: #eee;
@@ -116,6 +138,9 @@ export const EditPhotos = () => {
         visibility: hidden;
       } */
     /* } */
+    & > span {
+      border-radius: 8px;
+    }
 
     & > span:not(hover) > .card:active {
       animation: ${scaleUp};
@@ -180,21 +205,13 @@ export const EditPhotos = () => {
     border-radius: 8px;
   `;
 
-  S.CardBlank = styled.div`
-    height: 100%;
-    max-height: 193.453;
-    background-color: #e0e4e9;
-    border-radius: 8px;
-    border: 4px #dadfe6 dashed;
-  `;
-
   S.Card = styled.img`
     /* background-image: ${(props) =>
       props.backgroundImage ? props.backgroundImage : ""};
     background-position: 50% 50%;
     background-size: 100%;
     background-repeat: no-repeat; */
-    cursor: grab;
+    /* cursor: grab; */
     border-radius: 8px;
     flex-grow: 1;
     width: 100%;
@@ -203,6 +220,32 @@ export const EditPhotos = () => {
     object-fit: cover;
     box-sizing: inherit;
   `;
+  S.ImagesCount = styled.p`
+    position: absolute;
+    text-align: center;
+    top: 45%;
+    left: 30%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: white;
+    font-weight: bolder;
+  `;
+  S.Overlay = styled.div`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    background: #7f8180;
+    /* background: linear-gradient(
+      185deg,
+      #7f8180 0%,
+      rgba(117, 19, 93, 0.73) 100%
+    ); */
+    border-radius: 8px;
+  `;
+
   S.IconButton = styled(IconButton)`
     position: absolute !important;
     bottom: -12px !important;
@@ -248,7 +291,7 @@ export const EditPhotos = () => {
     }
   `;
   return (
-    <div>
+    <S.CardContainer>
       <S.Reorder
         reorderId="research"
         className={"reorder"}
@@ -265,11 +308,15 @@ export const EditPhotos = () => {
         }
       >
         {[...new Array(9)].map((content, idx) =>
-          idx <= photos.length - 1 ? (
-            <S.CardBox className="cardBox" key={photos[idx].id}>
+          idx <= photos.length - 1 && idx !== 8 ? (
+            <S.CardBox
+              borderRadius="8px"
+              className="cardBox"
+              key={photos[idx].id}
+            >
               <S.Card className="card" src={photos[idx].url} />
-              {/* <img src={photos[idx].url}></img> */}
-              <S.CardNumber className="cardNumber">{idx}</S.CardNumber>
+              <S.CardNumber className="cardNumber">{idx + 1}</S.CardNumber>
+              {/* {console.log("in here", idx, photos[idx].id, photos.length - 1)} */}
               <S.IconButton>
                 <S.DeleteIcon
                   className="delete"
@@ -282,44 +329,61 @@ export const EditPhotos = () => {
                 </S.DeleteIcon>
               </S.IconButton>
             </S.CardBox>
+          ) : photos.length < 9 ? (
+            <S.CardBox
+              key={idx + photos.length - 1}
+              height="193.453px"
+              maxHeight="193.453px"
+              backgroundColor="#e0e4e9"
+              border="4px #dadfe6 dashed"
+              borderRadius="8px"
+              cursor="not-allowed"
+              pointerEvents="none"
+            >
+              <S.IconButton>
+                <S.AddIcon
+                  viewBox="0 0 24 24"
+                  focusable="false"
+                  aria-hidden="true"
+                  role="presentation"
+                >
+                  <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"></path>
+                </S.AddIcon>
+              </S.IconButton>
+            </S.CardBox>
+          ) : photos.length > 9 ? (
+            <S.CardBox
+              className="cardBox"
+              borderRadius="8px"
+              key={photos[idx].id}
+            >
+              <S.Card className="card" src={photos[idx].url} />
+              <S.Overlay />
+              <S.ImagesCount>+{photos.length - 9} more</S.ImagesCount>
+            </S.CardBox>
           ) : (
-            [
-              photos.length - 1 < 7 ? (
-                <S.CardBox
-                  className="cardBox"
-                  key={idx + photos.length - 1}
-                  height="193.453px"
-                  maxHeight="193.453px"
-                  backgroundColor="#e0e4e9"
-                  border="4px #dadfe6 dashed"
-                  borderRadius="8px"
-                  cursor="not-allowed"
-                  pointerEvents="none"
+            <S.CardBox
+              borderRadius="8px"
+              className="cardBox"
+              key={photos[idx].id}
+            >
+              <S.Card className="card" src={photos[idx].url} />
+              <S.CardNumber className="cardNumber">{idx + 1}</S.CardNumber>
+              <S.IconButton>
+                <S.DeleteIcon
+                  className="delete"
+                  viewBox="0 0 24 24"
+                  focusable="false"
+                  aria-hidden="true"
+                  role="presentation"
                 >
-                  <S.IconButton>
-                    <S.AddIcon
-                      viewBox="0 0 24 24"
-                      focusable="false"
-                      aria-hidden="true"
-                      role="presentation"
-                    >
-                      <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"></path>
-                    </S.AddIcon>
-                  </S.IconButton>
-                </S.CardBox>
-              ) : (
-                <S.CardBox
-                  className="cardBox"
-                  key={idx + photos.length - 1}
-                  cursor="pointer"
-                >
-                  <S.Card className="card" src={photos[idx].url} />
-                </S.CardBox>
-              ),
-            ]
+                  <path d="M14.926 12.56v-1.14l5.282 5.288c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L11.512 15h1.138l-5.363 5.125c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417l5.201-5.288v1.14L3.873 7.27c-1.137-.976-1.137-2.44 0-3.417a1.973 1.973 0 0 1 3.251 0l5.282 5.207H11.27l5.444-5.207c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417l-5.2 5.288z"></path>
+                </S.DeleteIcon>
+              </S.IconButton>
+            </S.CardBox>
           )
         )}
       </S.Reorder>
-    </div>
+    </S.CardContainer>
   );
 };

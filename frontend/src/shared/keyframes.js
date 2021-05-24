@@ -61,6 +61,7 @@ export const fadeAway = keyframes`
     opacity 0;
    }
    `;
+
 export const scaleUp = keyframes`
 0% {
   transform: scale(1.0);
@@ -71,6 +72,16 @@ export const scaleUp = keyframes`
 
 }
 `;
+
+export const fadeIn = keyframes`
+   0% {
+      opacity 0;
+      }
+   100% {
+    opacity 1;
+   }
+   `;
+
 export const heartBeat = keyframes`
     0% {
       transform: scale(1);

@@ -3,7 +3,7 @@ import Files from "react-butterfiles";
 import styled from "styled-components/macro";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import { bounce, rubberBand, shakeX } from "../shared//keyframes";
+import { bounce, fadeIn, rubberBand, shakeX } from "../shared/keyframes";
 import PublishIcon from "@material-ui/icons/Publish";
 import CloudDoneIcon from "@material-ui/icons/CloudDone";
 import CloseIcon from "@material-ui/icons/Close";
@@ -127,6 +127,9 @@ export const UploadImage = () => {
     /* pointer-events: ${(props) => (props.pointer ? props.pointer : "")}; */
     &:hover ${S.ComingSoon} {
       display: block;
+      animation-name: ${fadeIn};
+      animation-duration: 0.7s;
+      animation-timing-function: ease-in-out;
     }
 
     /* border: red solid 2px; */
