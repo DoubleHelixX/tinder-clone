@@ -80,14 +80,37 @@ export const EditPhotos = () => {
       url: nel9,
     },
     // {
-    //   id: 9,
+    //   id: 1,
+
+    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    // },
+    // {
+    //   id: 2,
+    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    // },
+    // {
+    //   id: 3,
+
+    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    // },
+    // {
+    //   id: 4,
+    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    // },
+    // {
+    //   id: 5,
+
+    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    // },
+    // {
+    //   id: 6,
     //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
     // },
   ]);
 
   const OnReorder = useCallback(
     (event, previousIndex, nextIndex, fromId, toId) => {
-      console.log("ayyyo", event, previousIndex, nextIndex);
+      console.log("onReorder:", event, previousIndex, nextIndex);
       if (
         nextIndex < photos.length &&
         nextIndex !== 8 &&
@@ -163,10 +186,9 @@ export const EditPhotos = () => {
 
   S.CardBox = styled.span`
     position: relative;
-    width: 147.828px;
+    width: ${(props) => (props.width ? props.width : "147.828px")};
     height: 193.453px;
     margin: 6px;
-
     height: ${(props) => (props.height ? props.height : "")};
     max-height: ${(props) => (props.maxHeight ? props.maxHeight : "")};
     background-color: ${(props) =>
@@ -332,8 +354,9 @@ export const EditPhotos = () => {
           ) : photos.length < 9 ? (
             <S.CardBox
               key={idx + photos.length - 1}
-              height="193.453px"
-              maxHeight="193.453px"
+              height="185.453px"
+              width="139.828px"
+              maxHeight="185.453px"
               backgroundColor="#e0e4e9"
               border="4px #dadfe6 dashed"
               borderRadius="8px"

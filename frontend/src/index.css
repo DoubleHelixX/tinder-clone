@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: hidden!important;
+  /* overflow-y: hidden!important; */
   /* scroll-snap-type: y mandatory;
   scroll-snap-align: end; */
 
