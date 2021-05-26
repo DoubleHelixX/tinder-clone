@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow-y: hidden!important; */
+  overflow-y: auto!important;
   /* scroll-snap-type: y mandatory;
   scroll-snap-align: end; */
 
@@ -25,7 +25,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 0px;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -49,8 +49,136 @@ code {
     monospace;
 }
 
+.EditAccountContainer{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+    
+}
+.EditAccountContainer::-webkit-scrollbar-track {
+  border: 1px double rgb(255, 255, 255);
+  padding: 2px 0;
+  background-color: #f3f3f3;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.EditAccountContainer::-webkit-scrollbar {
+  width: 0px;
+}
+
+.EditAccountContainer::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px #c7c7c7;
+  background-color: #fe3c7380;
+  border: 1px solid rgb(255, 255, 255);
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-right-radius: 3px;
+  visibility: collapse;
+}
+.EditAccountContainer:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+.TFContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  width:100%;
+  position: relative;
+
+  /* border: 2px blue solid; */
+  
+}
 
 
+.TFContainer .MuiFilledInput-root {
+  background: #fff;
+  width: 100vw;
+  height: 50px;
+  border: 1px solid #e8e8e8;
+
+}
+.EditAccountContainer .TFContainer:nth-child(7) .MuiFilledInput-root {
+  background: #fff;
+  width: 100vw;
+  height: 339px;
+  border: 1px solid #e8e8e8;
+}
+.EditAccountContainer .TFContainer:last-child{
+  margin-bottom: 120px;
+/* border: red solid 8px; */
+}
+.MuiFilledInput-root textarea {
+  height: 100%;
+
+
+  /* border: 2px red solid; */
+}
+
+.MuiFilledInput-root textarea::-webkit-scrollbar {
+  width: 0px!important;
+}
+
+/* .MuiFilledInput-root textarea::-webkit-scrollbar-track {
+  border: 1px double rgb(255, 255, 255);
+  padding: 2px 0;
+  background-color: #f3f3f3;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.MuiFilledInput-root textarea::-webkit-scrollbar {
+  width: 0px;
+}
+
+.MuiFilledInput-root textarea::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px #c7c7c7;
+  background-color: #fe3c7380;
+  border: 1px solid rgb(255, 255, 255);
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-right-radius: 3px;
+  visibility: collapse;
+}
+.MuiFilledInput-root textarea:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+} */
+.MuiFilledInput-root:hover {
+  background: white!important;
+  box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.07);
+}
+.MuiFilledInput-root:not(focus) {
+  background: white!important;
+}
+/* & label.Mui-focused {
+  color: white;
+}
+& .MuiInput-underline:after {
+  border-bottom-color: white;
+}
+& .MuiOutlinedInput-root {
+  & fieldset {
+    border-color: white;
+  }
+  &:hover fieldset {
+    border-color: white;
+  }
+  &.Mui-focused fieldset {
+    border-color: white;
+  } */
 
 
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap'); */

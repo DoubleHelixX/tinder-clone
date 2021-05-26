@@ -122,7 +122,7 @@ export const UploadImage = () => {
     width: 95%;
     max-width: 800px;
     min-height: 150px;
-    height: 10vh;
+    height: 150px;
     border-radius: 30px;
     /* pointer-events: ${(props) => (props.pointer ? props.pointer : "")}; */
     &:hover ${S.ComingSoon} {
@@ -144,7 +144,7 @@ export const UploadImage = () => {
     /* border: 2px groove inherit; */
     margin: ${(props) => (props.margin ? props.margin : "auto")};
     background-position: center;
-    /* height: 10vh; */
+    /* height: 150px; */
     min-height: 150px;
     border-radius: 30px;
     max-width: 800px;
@@ -303,7 +303,7 @@ export const UploadImage = () => {
     style: {
       width: "95%",
       margin: "auto",
-      height: "10vh",
+      height: "150px",
       maxWidth: 800,
       minHeight: 150,
       maxHeight: 200,
@@ -383,8 +383,8 @@ export const UploadImage = () => {
                   width="100%"
                   display="none"
                   flexDirection="column"
-                  left="0vw"
-                  top="6vh"
+                  left="0"
+                  top="50%"
                   margin="auto"
                 >
                   Drag and Drop

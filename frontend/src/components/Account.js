@@ -27,12 +27,20 @@ import "../index.css";
 export const Account = () => {
   const tipArry = [
     "Don't forget to keep your photos fresh",
-    "Not everyone appreciates only gym photos",
+    "Not everyone appreciates a gym pic",
     "Some people want to see you smile",
-    "You have 9 shots at a first impression",
+    "You have 9 shots at a first impression. Use them all",
     "Try to keep your tongue in your mouth",
     "Keep the kids out of frame",
     "Get off your motocycle",
+    "You and a dog make a great pic",
+    "The only weapon we want to see is your smile",
+    "Keep the group selfies to a minimum",
+    "Got a Uniform? Flaunt it",
+    "Make waves with a beach photo",
+    "Keep it casual and lose the suit",
+    "Kiss those selfies goodbye",
+    "You and your dog make a great pic",
   ];
   const randomNumber = Math.floor(Math.random() * tipArry.length);
   const S = {};
@@ -278,6 +286,9 @@ export const Account = () => {
     margin: 15px;
     width: 94.783vw;
     margin-top: 2vh;
+    & a {
+      height: 35px;
+    }
     @media (max-height: 786px) {
       display: none;
     }

@@ -283,7 +283,7 @@ export const SlideshowAds = () => {
               key={idx}
               display={index === 6 && idx === 5 ? "none" : ""}
               onClick={() => {
-                setIndex(idx + 1);
+                setIndex(idx);
               }}
             ></S.SlideshowDot>
           )

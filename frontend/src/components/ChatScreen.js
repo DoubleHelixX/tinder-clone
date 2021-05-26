@@ -30,12 +30,71 @@ export const Chatscreen = () => {
     {
       message: "leave me alone.",
     },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "Hey cutie ! how is your day going? 😃",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "Hey ? ❣️",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "How was your weekend?",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      message: "leave me alone.",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "How was your weekend?",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      message: "leave me alone.",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "Hey cutie ! how is your day going? 😃",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "Hey ? ❣️",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      firstName: "Nel",
+      lastName: " ",
+      message: "How was your week?",
+      url: nel,
+      timestamp: "32 minutes ago",
+    },
+    {
+      message: "leave me aaa.",
+    },
   ]);
 
   const S = {};
   S.ChatScreenContainer = styled.div`
     overflow: auto;
-    height: 100vh;
+    height: calc(100vh - 90px);
+    /* border: 2px red solid; */
     &::-webkit-scrollbar-track {
       border: 1px double rgb(255, 255, 255);
       padding: 2px 0;
@@ -47,7 +106,7 @@ export const Chatscreen = () => {
     }
 
     &::-webkit-scrollbar {
-      width: 10px;
+      width: 0px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -74,6 +133,9 @@ export const Chatscreen = () => {
     align-items: center;
     padding: 20px;
     max-height: 75%;
+    &:last-child {
+      margin-bottom: 20px;
+    }
   `;
   S.Message = styled.p`
     margin-left: 10px;
@@ -94,7 +156,6 @@ export const Chatscreen = () => {
   S.FormContainer = styled.div`
     border: none;
     display: block;
-    margin-top: 30px;
     overflow: hidden;
   `;
 

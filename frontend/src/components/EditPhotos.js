@@ -33,6 +33,7 @@ import { useCallback } from "react";
 import "../index.css";
 
 export const EditPhotos = () => {
+  const [reorderSize, setReorderSize] = useState(9);
   const [photos, setPhotos] = useState([
     {
       id: 0,
@@ -79,33 +80,33 @@ export const EditPhotos = () => {
 
       url: nel9,
     },
-    // {
-    //   id: 1,
+    {
+      id: 9,
 
-    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    // },
-    // {
-    //   id: 2,
-    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
-    // },
-    // {
-    //   id: 3,
+      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    },
+    {
+      id: 10,
+      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    },
+    {
+      id: 11,
 
-    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    // },
-    // {
-    //   id: 4,
-    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
-    // },
-    // {
-    //   id: 5,
+      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    },
+    {
+      id: 12,
+      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    },
+    {
+      id: 13,
 
-    //   url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    // },
-    // {
-    //   id: 6,
-    //   url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
-    // },
+      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+    },
+    {
+      id: 14,
+      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+    },
   ]);
 
   const OnReorder = useCallback(
@@ -115,7 +116,7 @@ export const EditPhotos = () => {
         nextIndex < photos.length &&
         nextIndex !== 8 &&
         previousIndex !== 8 &&
-        photos.length <= 9
+        photos.length <= reorderSize
       )
         setPhotos([...photos.move(previousIndex, nextIndex)]);
       console.log("here", fromId, toId);
@@ -130,23 +131,27 @@ export const EditPhotos = () => {
     padding: 4px;
 
     flex-direction: column;
-    max-width: 500px;
+    max-width: 98.425vw;
+    min-height: 40vh;
     margin: auto;
     background-color: #f5f7fa;
     margin-top: 5px;
-
+    border-radius: 8px;
+    @media (min-width: 600px) {
+      border: 2px dashed gray;
+    }
     /* border: 2px red solid; */
   `;
   S.Reorder = styled(Reorder)`
     /* margin-top: 5px; */
-    padding: 4px;
+    /* padding: 4px; */
     background-color: #f5f7fa;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     position: relative;
     border-radius: 8px;
-
+    margin-bottom: 8px;
     /* & .dragged {
       background-color: #eee;
       transform: scale(0.98, 0.98);
@@ -186,8 +191,8 @@ export const EditPhotos = () => {
 
   S.CardBox = styled.span`
     position: relative;
-    width: ${(props) => (props.width ? props.width : "147.828px")};
-    height: 193.453px;
+    width: ${(props) => (props.width ? props.width : "29.100vw")};
+    height: 23.086124401913878vh;
     margin: 6px;
     height: ${(props) => (props.height ? props.height : "")};
     max-height: ${(props) => (props.maxHeight ? props.maxHeight : "")};
@@ -238,7 +243,7 @@ export const EditPhotos = () => {
     flex-grow: 1;
     width: 100%;
     height: 100%;
-    max-height: 193.453;
+    max-height: auto;
     object-fit: cover;
     box-sizing: inherit;
   `;
@@ -329,8 +334,8 @@ export const EditPhotos = () => {
           <S.Placeholder /> // Custom placeholder element (optional), defaults to clone of dragged element
         }
       >
-        {[...new Array(9)].map((content, idx) =>
-          idx <= photos.length - 1 && idx !== 8 ? (
+        {[...new Array(reorderSize)].map((content, idx) =>
+          idx <= photos.length - 1 && idx !== reorderSize - 1 ? (
             <S.CardBox
               borderRadius="8px"
               className="cardBox"
@@ -351,7 +356,7 @@ export const EditPhotos = () => {
                 </S.DeleteIcon>
               </S.IconButton>
             </S.CardBox>
-          ) : photos.length < 9 ? (
+          ) : photos.length < reorderSize ? (
             <S.CardBox
               key={idx + photos.length - 1}
               height="185.453px"
@@ -374,15 +379,17 @@ export const EditPhotos = () => {
                 </S.AddIcon>
               </S.IconButton>
             </S.CardBox>
-          ) : photos.length > 9 ? (
+          ) : photos.length > reorderSize ? (
             <S.CardBox
+              onClick={() => setReorderSize(photos.length)}
               className="cardBox"
               borderRadius="8px"
               key={photos[idx].id}
+              cursor="pointer"
             >
               <S.Card className="card" src={photos[idx].url} />
               <S.Overlay />
-              <S.ImagesCount>+{photos.length - 9} more</S.ImagesCount>
+              <S.ImagesCount>+{photos.length - reorderSize} more</S.ImagesCount>
             </S.CardBox>
           ) : (
             <S.CardBox
