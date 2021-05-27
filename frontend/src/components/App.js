@@ -27,7 +27,12 @@ const App = () => {
   S.TinderBodyContainer = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
+    height: auto;
+    min-height: 462px;
+    margin-top: 20px;
+    /* border: 2px red solid; */
   `;
 
   // const match = useRouteMatch();
