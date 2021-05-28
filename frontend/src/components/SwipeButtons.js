@@ -15,7 +15,7 @@ S.SwipeButtonsContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 `;
 S.SwipeIconButton = styled(IconButton)`
   background-color: white;

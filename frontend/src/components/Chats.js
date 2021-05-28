@@ -8,6 +8,104 @@ import { Link, useHistory } from "react-router-dom";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 // import { useSelector, useDispatch } from "react-redux";
 
+const S = {};
+S.ChatContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  height: 70px;
+  border-bottom: 1px solid #fafafa;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
+S.ChatImg = styled(Avatar)`
+  margin-right: 0px;
+`;
+S.ChatDetails = styled.div`
+  flex: 1;
+  margin-left: 20px;
+`;
+S.ChatName = styled.h2``;
+S.ChatMessage = styled.p`
+  color: gray;
+  text-decoration: none;
+`;
+S.ChatTimestamp = styled.p`
+  color: lightgray;
+`;
+
+const OnlineBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: -1,
+      left: -1,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      animationDuration: "3s",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(2.4)",
+      opacity: 0,
+    },
+  },
+}))(Badge);
+
+const IdleBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: "#F1C232",
+    color: "#F1C232",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: -1,
+      left: -1,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      animationDuration: "3s",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+}))(Badge);
+
+const OfflineBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: "#CC0000",
+    color: "#CC0000",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: -1,
+      left: -1,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      animationDuration: "3s",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+}))(Badge);
 export const Chats = () => {
   const [people, setPeople] = useState([
     {
@@ -35,105 +133,6 @@ export const Chats = () => {
       status: "online",
     },
   ]);
-
-  const S = {};
-  S.ChatContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    height: 70px;
-    border-bottom: 1px solid #fafafa;
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  `;
-  S.ChatImg = styled(Avatar)`
-    margin-right: 0px;
-  `;
-  S.ChatDetails = styled.div`
-    flex: 1;
-    margin-left: 20px;
-  `;
-  S.ChatName = styled.h2``;
-  S.ChatMessage = styled.p`
-    color: gray;
-    text-decoration: none;
-  `;
-  S.ChatTimestamp = styled.p`
-    color: lightgray;
-  `;
-
-  const OnlineBadge = withStyles((theme) => ({
-    badge: {
-      backgroundColor: "#44b700",
-      color: "#44b700",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      "&::after": {
-        position: "absolute",
-        top: -1,
-        left: -1,
-        width: "100%",
-        height: "100%",
-        borderRadius: "50%",
-        animation: "$ripple 1.2s infinite ease-in-out",
-        animationDuration: "3s",
-        border: "1px solid currentColor",
-        content: '""',
-      },
-    },
-    "@keyframes ripple": {
-      "0%": {
-        transform: "scale(.8)",
-        opacity: 1,
-      },
-      "100%": {
-        transform: "scale(2.4)",
-        opacity: 0,
-      },
-    },
-  }))(Badge);
-
-  const IdleBadge = withStyles((theme) => ({
-    badge: {
-      backgroundColor: "#F1C232",
-      color: "#F1C232",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      "&::after": {
-        position: "absolute",
-        top: -1,
-        left: -1,
-        width: "100%",
-        height: "100%",
-        borderRadius: "50%",
-        animation: "$ripple 1.2s infinite ease-in-out",
-        animationDuration: "3s",
-        border: "1px solid currentColor",
-        content: '""',
-      },
-    },
-  }))(Badge);
-
-  const OfflineBadge = withStyles((theme) => ({
-    badge: {
-      backgroundColor: "#CC0000",
-      color: "#CC0000",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      "&::after": {
-        position: "absolute",
-        top: -1,
-        left: -1,
-        width: "100%",
-        height: "100%",
-        borderRadius: "50%",
-        animation: "$ripple 1.2s infinite ease-in-out",
-        animationDuration: "3s",
-        border: "1px solid currentColor",
-        content: '""',
-      },
-    },
-  }))(Badge);
 
   return (
     <div>

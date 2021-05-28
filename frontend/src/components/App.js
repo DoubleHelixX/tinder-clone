@@ -21,20 +21,22 @@ import { UploadImage } from "./UploadImage";
 import { EditAccount } from "./EditAccount";
 import { WebcamCapture } from "./WebcamCapture";
 
+const S = {};
+S.AppContainer = styled.div`
+  /* border: 2px yellow solid; */
+`;
+S.TinderBodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+  min-height: 462px;
+  margin-top: 8px;
+  /* width: 100%; */
+  /* border: 2px yellow solid; */
+`;
 const App = () => {
-  const S = {};
-  S.AppContainer = styled.div``;
-  S.TinderBodyContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: auto;
-    min-height: 462px;
-    margin-top: 20px;
-    /* border: 2px red solid; */
-  `;
-
   // const match = useRouteMatch();
   return (
     <S.AppContainer>
@@ -78,10 +80,7 @@ const App = () => {
               <Header />
             </contextTheme.Provider>
 
-            <S.TinderBodyContainer>
-              <TinderCards />
-              <SwipeButtons />
-            </S.TinderBodyContainer>
+            <TinderCards />
           </Route>
         </Switch>
       </Router>

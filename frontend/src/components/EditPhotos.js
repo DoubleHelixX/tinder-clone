@@ -32,6 +32,200 @@ import { useState } from "react";
 import { useCallback } from "react";
 import "../index.css";
 
+const S = {};
+
+S.CardContainer = styled.div`
+  display: flex;
+  padding: 4px;
+
+  flex-direction: column;
+  max-width: 98.425vw;
+  min-height: 40vh;
+  margin: auto;
+  background-color: #f5f7fa;
+  margin-top: 5px;
+  border-radius: 8px;
+  @media (min-width: 600px) {
+    border: 2px dashed gray;
+  }
+  /* border: 2px red solid; */
+`;
+S.Reorder = styled(Reorder)`
+  /* margin-top: 5px; */
+  /* padding: 4px; */
+  background-color: #f5f7fa;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  /* & .dragged {
+    background-color: #eee;
+    transform: scale(0.98, 0.98);
+    opacity: 0.7;
+  } */
+
+  /* & .placeholder {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+
+    .inner {
+      visibility: hidden;
+    } */
+  /* } */
+  & > span {
+    border-radius: 8px;
+  }
+
+  & > span:not(hover) > .card:active {
+    animation: ${scaleUp};
+    transform-origin: center;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  &:active > span .cardNumber {
+    display: inline;
+  }
+
+  &:active:hover .delete {
+    animation: ${fadeAway};
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+`;
+
+S.CardBox = styled.span`
+  position: relative;
+  width: ${(props) => (props.width ? props.width : "29.100vw")};
+  height: 23.086124401913878vh;
+  margin: 6px;
+  height: ${(props) => (props.height ? props.height : "")};
+  max-height: ${(props) => (props.maxHeight ? props.maxHeight : "")};
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : ""};
+  border: ${(props) => (props.border ? props.border : "")};
+  border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "")};
+  cursor: ${(props) => (props.cursor ? props.cursor : "grab")};
+  pointer-events: ${(props) =>
+    props.pointerEvents ? props.pointerEvents : ""};
+
+  /* &
+    > span:nth-child(${(props) => (props.index ? props.index : "")})
+    .cardBox
+    .card:active {
+    display: none;
+  } */
+`;
+
+S.CardNumber = styled.p`
+  font-size: 2.2rem;
+  line-height: 1.3125;
+  display: none;
+  font-weight: bolder;
+  position: absolute;
+  padding: 12px;
+  color: white;
+  top: 0;
+  left: 0;
+  font-family: "Montserrat", sans-serif;
+`;
+S.Placeholder = styled.div`
+  position: relative;
+  width: 147.828px;
+  height: 193.453px;
+  margin: 6px;
+  border-radius: 8px;
+`;
+
+S.Card = styled.img`
+  /* background-image: ${(props) =>
+    props.backgroundImage ? props.backgroundImage : ""};
+  background-position: 50% 50%;
+  background-size: 100%;
+  background-repeat: no-repeat; */
+  /* cursor: grab; */
+  border-radius: 8px;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  max-height: auto;
+  object-fit: cover;
+  box-sizing: inherit;
+`;
+S.ImagesCount = styled.p`
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  left: 30%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: white;
+  font-weight: bolder;
+`;
+S.Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  background: #7f8180;
+  /* background: linear-gradient(
+    185deg,
+    #7f8180 0%,
+    rgba(117, 19, 93, 0.73) 100%
+  ); */
+  border-radius: 8px;
+`;
+
+S.IconButton = styled(IconButton)`
+  position: absolute !important;
+  bottom: -12px !important;
+  right: -6px !important;
+  padding: 0 !important;
+`;
+
+S.DeleteIcon = styled.svg`
+  /* padding: 0vw !important; */
+  background: white;
+  border-radius: 25px;
+  width: 16px;
+  height: 16px;
+  padding: 6px;
+  & > path {
+    fill: #fe4b6b;
+    /* stroke: #fff4f5; */
+  }
+  &:hover {
+    animation-name: ${jello};
+    transform-origin: center;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+`;
+
+S.AddIcon = styled.svg`
+  /* padding: 0vw !important; */
+  background: #fd5068;
+  border-radius: 25px;
+  width: 16px;
+  height: 16px;
+  padding: 6px;
+  & > path {
+    fill: white;
+    /* stroke: #fff4f5; */
+  }
+  &:hover {
+    animation-name: ${jello};
+    transform-origin: center;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+`;
+
 export const EditPhotos = () => {
   const [reorderSize, setReorderSize] = useState(9);
   const [photos, setPhotos] = useState([
@@ -124,199 +318,6 @@ export const EditPhotos = () => {
     [photos] // Tells React to memoize regardless of arguments
   );
 
-  const S = {};
-
-  S.CardContainer = styled.div`
-    display: flex;
-    padding: 4px;
-
-    flex-direction: column;
-    max-width: 98.425vw;
-    min-height: 40vh;
-    margin: auto;
-    background-color: #f5f7fa;
-    margin-top: 5px;
-    border-radius: 8px;
-    @media (min-width: 600px) {
-      border: 2px dashed gray;
-    }
-    /* border: 2px red solid; */
-  `;
-  S.Reorder = styled(Reorder)`
-    /* margin-top: 5px; */
-    /* padding: 4px; */
-    background-color: #f5f7fa;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    position: relative;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    /* & .dragged {
-      background-color: #eee;
-      transform: scale(0.98, 0.98);
-      opacity: 0.7;
-    } */
-
-    /* & .placeholder {
-      background-color: #ccc;
-      border: 2px solid #ccc;
-
-      .inner {
-        visibility: hidden;
-      } */
-    /* } */
-    & > span {
-      border-radius: 8px;
-    }
-
-    & > span:not(hover) > .card:active {
-      animation: ${scaleUp};
-      transform-origin: center;
-      animation-duration: 0.5s;
-      animation-fill-mode: forwards;
-    }
-
-    &:active > span .cardNumber {
-      display: inline;
-    }
-
-    &:active:hover .delete {
-      animation: ${fadeAway};
-      animation-timing-function: ease-in-out;
-      animation-duration: 0.5s;
-      animation-fill-mode: forwards;
-    }
-  `;
-
-  S.CardBox = styled.span`
-    position: relative;
-    width: ${(props) => (props.width ? props.width : "29.100vw")};
-    height: 23.086124401913878vh;
-    margin: 6px;
-    height: ${(props) => (props.height ? props.height : "")};
-    max-height: ${(props) => (props.maxHeight ? props.maxHeight : "")};
-    background-color: ${(props) =>
-      props.backgroundColor ? props.backgroundColor : ""};
-    border: ${(props) => (props.border ? props.border : "")};
-    border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "")};
-    cursor: ${(props) => (props.cursor ? props.cursor : "grab")};
-    pointer-events: ${(props) =>
-      props.pointerEvents ? props.pointerEvents : ""};
-
-    /* &
-      > span:nth-child(${(props) => (props.index ? props.index : "")})
-      .cardBox
-      .card:active {
-      display: none;
-    } */
-  `;
-
-  S.CardNumber = styled.p`
-    font-size: 2.2rem;
-    line-height: 1.3125;
-    display: none;
-    font-weight: bolder;
-    position: absolute;
-    padding: 12px;
-    color: white;
-    top: 0;
-    left: 0;
-    font-family: "Montserrat", sans-serif;
-  `;
-  S.Placeholder = styled.div`
-    position: relative;
-    width: 147.828px;
-    height: 193.453px;
-    margin: 6px;
-    border-radius: 8px;
-  `;
-
-  S.Card = styled.img`
-    /* background-image: ${(props) =>
-      props.backgroundImage ? props.backgroundImage : ""};
-    background-position: 50% 50%;
-    background-size: 100%;
-    background-repeat: no-repeat; */
-    /* cursor: grab; */
-    border-radius: 8px;
-    flex-grow: 1;
-    width: 100%;
-    height: 100%;
-    max-height: auto;
-    object-fit: cover;
-    box-sizing: inherit;
-  `;
-  S.ImagesCount = styled.p`
-    position: absolute;
-    text-align: center;
-    top: 45%;
-    left: 30%;
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-    color: white;
-    font-weight: bolder;
-  `;
-  S.Overlay = styled.div`
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-    background: #7f8180;
-    /* background: linear-gradient(
-      185deg,
-      #7f8180 0%,
-      rgba(117, 19, 93, 0.73) 100%
-    ); */
-    border-radius: 8px;
-  `;
-
-  S.IconButton = styled(IconButton)`
-    position: absolute !important;
-    bottom: -12px !important;
-    right: -6px !important;
-    padding: 0 !important;
-  `;
-
-  S.DeleteIcon = styled.svg`
-    /* padding: 0vw !important; */
-    background: white;
-    border-radius: 25px;
-    width: 16px;
-    height: 16px;
-    padding: 6px;
-    & > path {
-      fill: #fe4b6b;
-      /* stroke: #fff4f5; */
-    }
-    &:hover {
-      animation-name: ${jello};
-      transform-origin: center;
-      animation-duration: 1s;
-      animation-timing-function: ease-in-out;
-    }
-  `;
-
-  S.AddIcon = styled.svg`
-    /* padding: 0vw !important; */
-    background: #fd5068;
-    border-radius: 25px;
-    width: 16px;
-    height: 16px;
-    padding: 6px;
-    & > path {
-      fill: white;
-      /* stroke: #fff4f5; */
-    }
-    &:hover {
-      animation-name: ${jello};
-      transform-origin: center;
-      animation-duration: 1s;
-      animation-timing-function: ease-in-out;
-    }
-  `;
   return (
     <S.CardContainer>
       <S.Reorder

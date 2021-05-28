@@ -1,5 +1,112 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
+
+const S = {};
+S.Slideshow = styled.div`
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 2px blue solid; */
+`;
+S.SlideshowSlider = styled.div`
+  white-space: nowrap;
+  transition: ease 1000ms;
+  /* border: 2px green solid; */
+`;
+S.Slide = styled.div`
+  display: inline-block;
+
+  height: auto;
+  width: 100%;
+  border-radius: 40px;
+  border: 2px inherit solid;
+`;
+S.SlideshowDots = styled.div`
+  text-align: center;
+  width: inherit;
+  border: 2px inherit solid;
+  /* margin-right: 38px; */
+`;
+S.SlideshowDot = styled.div`
+  display: ${(props) => (props.display ? props.display : "inline-block")};
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 3px 0px;
+
+  background-color: #c4c4c4;
+`;
+
+S.SlideshowDotActive = styled.span`
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 3px 0px;
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "#000000"};
+`;
+S.AdContainer = styled.div`
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  flex-direction: center;
+  /* border: 2px red solid; */
+  font-weight: 500;
+`;
+S.AdTitleContents = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 2px purple solid; */
+`;
+S.AdLogo = styled.svg`
+  height: 26px;
+  width: 28px;
+  object-fit: contain;
+  padding-right: 8px;
+  padding-bottom: ${(props) => props.paddingBottom};
+
+  /* border: red 2px solid; */
+
+  & > path {
+    fill: ${(props) =>
+      props.index === 0 ? 'url("#gradient")!important ' : ""};
+    fill-rule: "nonzero";
+  }
+`;
+
+S.AdTitle = styled.h3`
+  font-family: Arial, sans-serif;
+  color: #1f1f1f;
+  padding: 0;
+  margin: 0;
+  /* border: red 2px solid; */
+`;
+S.AdDescription = styled.p`
+  color: #1f1f1f;
+`;
+
 export const SlideshowAds = () => {
   const [ads, setAds] = useState([
     {
@@ -43,111 +150,6 @@ export const SlideshowAds = () => {
       path: "M21.994 10.225c0-3.598-2.395-6.212-5.72-6.212-1.78 0-2.737.647-4.27 2.135C10.463 4.66 9.505 4 7.732 4 4.407 4 2 6.62 2 10.231c0 1.52.537 2.95 1.533 4.076l8.024 7.357c.246.22.647.22.886 0l7.247-6.58.44-.401.162-.182.168-.174a6.152 6.152 0 0 0 1.54-4.09",
     },
   ]);
-  const S = {};
-  S.Slideshow = styled.div`
-    margin: 0 auto;
-    overflow: hidden;
-    max-width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* border: 2px blue solid; */
-  `;
-  S.SlideshowSlider = styled.div`
-    white-space: nowrap;
-    transition: ease 1000ms;
-    /* border: 2px green solid; */
-  `;
-  S.Slide = styled.div`
-    display: inline-block;
-
-    height: auto;
-    width: 100%;
-    border-radius: 40px;
-    border: 2px inherit solid;
-  `;
-  S.SlideshowDots = styled.div`
-    text-align: center;
-    width: inherit;
-    border: 2px inherit solid;
-    /* margin-right: 38px; */
-  `;
-  S.SlideshowDot = styled.div`
-    display: ${(props) => (props.display ? props.display : "inline-block")};
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-
-    cursor: pointer;
-    margin: 15px 3px 0px;
-
-    background-color: #c4c4c4;
-  `;
-
-  S.SlideshowDotActive = styled.span`
-    display: inline-block;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-
-    cursor: pointer;
-    margin: 15px 3px 0px;
-    background-color: ${(props) =>
-      props.backgroundColor ? props.backgroundColor : "#000000"};
-  `;
-  S.AdContainer = styled.div`
-    background-color: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    align-items: center;
-    width: 100%;
-    flex-direction: center;
-    /* border: 2px red solid; */
-    font-weight: 500;
-  `;
-  S.AdTitleContents = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    width: 100%;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    /* border: 2px purple solid; */
-  `;
-  S.AdLogo = styled.svg`
-    height: 26px;
-    width: 28px;
-    object-fit: contain;
-    padding-right: 8px;
-    padding-bottom: ${(props) => props.paddingBottom};
-
-    /* border: red 2px solid; */
-
-    & > path {
-      fill: ${(props) =>
-        props.index === 0 ? 'url("#gradient")!important ' : ""};
-      fill-rule: "nonzero";
-    }
-  `;
-
-  S.AdTitle = styled.h3`
-    font-family: Arial, sans-serif;
-    color: #1f1f1f;
-    padding: 0;
-    margin: 0;
-    /* border: red 2px solid; */
-  `;
-  S.AdDescription = styled.p`
-    color: #1f1f1f;
-  `;
 
   const delay = 1800;
 
@@ -173,7 +175,7 @@ export const SlideshowAds = () => {
           }),
         delay
       );
-    } else setTimeout(() => setIndex(() => 6), delay);
+    } else setTimeout(() => setIndex(6), delay);
 
     return () => {
       console.log("index", index);
@@ -275,7 +277,7 @@ export const SlideshowAds = () => {
               key={idx}
               backgroundColor={ad.color ? ad.color : ad.color1}
               onClick={() => {
-                setIndex(idx);
+                setIndex(index === 6 ? idx - 1 : idx);
               }}
             ></S.SlideshowDotActive>
           ) : (
@@ -283,7 +285,7 @@ export const SlideshowAds = () => {
               key={idx}
               display={index === 6 && idx === 5 ? "none" : ""}
               onClick={() => {
-                setIndex(idx);
+                setIndex(index === 6 ? idx + 1 : idx);
               }}
             ></S.SlideshowDot>
           )
