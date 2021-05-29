@@ -303,3 +303,124 @@ export const shake = keyframes`
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 `;
+
+export const enterUpExitRight = keyframes`
+0%{ 
+  display: block;
+  visibility: visible;
+  z-index: 1;
+  -webkit-transform: rotate(0deg);
+
+  transform: translateY(20px) scale(0.7);
+    opacity: 0.7;
+  }
+   20% {
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+    -webkit-transform: rotate(15deg);
+  }
+
+30%{
+  -webkit-transform: rotate(0deg);
+
+}
+  40% {
+    -webkit-transform: rotate(15deg);
+
+    transform: scale(1);
+    opacity: 1;
+  }
+  50%{
+    -webkit-transform: rotate(-15deg);
+  }
+
+  60%{
+    -webkit-transform: rotate(15deg);
+
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+  90%{
+    -webkit-transform: rotate(0deg);
+    transform: translateX(20px) scale(0.7);
+    opacity: 0.7;
+    visibility: hidden;
+    z-index: -5;
+  }
+
+`;
+
+export const enterRightExitUp = keyframes`
+0%{ 
+  display: block;
+  visibility: visible;
+  z-index: 1;
+  -webkit-transform: rotate(0deg);
+
+  transform: translateX(-20px) scale(0.7);
+    opacity: 0.7;
+  }
+   20% {
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+    -webkit-transform: rotate(15deg);
+  }
+
+30%{
+  -webkit-transform: rotate(0deg);
+
+}
+  40% {
+    -webkit-transform: rotate(15deg);
+
+    transform: scale(1);
+    opacity: 1;
+  }
+  50%{
+    -webkit-transform: rotate(-15deg);
+  }
+
+  60%{
+    -webkit-transform: rotate(15deg);
+
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+  90%{
+    -webkit-transform: rotate(0deg);
+    transform: translateY(-20px) scale(0.7);
+    opacity: 0.7;
+    visibility: hidden;
+    z-index: -5;
+  }
+
+`;
+
+export const exitUpEnterUp = keyframes`
+0%{ 
+  /* visibility: hidden; */
+  z-index: 1;
+  transform: translateY(0px) scale(0.7);
+  opacity: 0.7;
+  }
+   20% {
+  transform: translateY(-20px) scale(0.7);
+  opacity: 0;
+  z-index: -5;
+  visibility: hidden;
+  }
+
+80%{
+  transform: translateY(20px) scale(0.7);
+  opacity: 0;
+}
+  100%{
+    opacity: 1;
+    visibility: visable;
+    z-index: 0;
+    transform: translateY(0px) scale(0.7);
+    transform: scale(1);
+   
+  }
+
+`;
