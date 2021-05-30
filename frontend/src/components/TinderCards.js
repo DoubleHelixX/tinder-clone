@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import TinderCard from "react-tinder-card";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import IconButton from "@material-ui/core/IconButton";
 
 import ReplayIcon from "@material-ui/icons/Replay";
@@ -15,6 +15,8 @@ import {
   enterUpExitRight,
   enterRightExitUp,
   exitUpEnterUp,
+  fadeInUp,
+  rollIn,
 } from "../shared//keyframes";
 
 import nel from "../images/nel.png";
@@ -26,8 +28,10 @@ import nel6 from "../images/nel6.jpg";
 import nel7 from "../images/nel7.png";
 import nel8 from "../images/nel8.jpg";
 import nel9 from "../images/nel9.png";
+import { useHistory } from "react-router-dom";
 
 const S = {};
+
 S.TinderCardContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -62,6 +66,9 @@ S.TinderCard = styled.div`
 S.TinderCardSwipe = styled.div`
   position: absolute;
   height: 100%;
+  animation: ${rollIn};
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
   & > div {
     height: 100%;
   }
@@ -114,6 +121,35 @@ S.PhotoSwitchBtn = styled.button`
 
   /* border: 2px red solid; */
 `;
+S.SuperLikeHint = styled.h1`
+  color: #24b9ff;
+  position: sticky;
+  width: 186.875px;
+  margin: auto;
+
+  top: 30%;
+  /* border-top: 0px solid #24b9ff; */
+  /* border-bottom: 2px groove #24b9ff; */
+  /* outline: 5px groove rgba(36, 185, 255, 0.35); */
+  /* outline-offset: 12px; */
+  padding: 20px;
+  border-radius: 40px 0px 40px 0px;
+  text-align: center;
+  color: #ffffff;
+
+  -webkit-box-shadow: 0px 1px 5px 0px rgb(64, 116, 181, 0.08),
+    0px 1px 5px 0px rgb(64, 116, 181, 0.08), 0px 5px 35px 5px rgba(0, 0, 0, 0);
+  /* box-shadow: 0px 15px 15px 0px #4074b5, 0px -15px 35px 0px #4074b5,
+    0px 5px 35px 5px rgba(0, 0, 0, 0); */
+  background: transparent;
+  text-shadow: 2px 2px 0 #24b9ff, 2px -2px 0 #24b9ff, -2px 2px 0 #24b9ff,
+    -2px -2px 0 #24b9ff, 2px 0px 0 #24b9ff, 0px 2px 0 #24b9ff,
+    -2px 0px 0 #24b9ff, 0px -2px 0 #24b9ff;
+  z-index: -1;
+  animation: ${fadeInUp};
+  animation-duration: 12s;
+  animation-timing-function: ease-in-out;
+`;
 S.UserDataContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -121,6 +157,7 @@ S.UserDataContainer = styled.div`
   bottom: 30px;
   left: 10px;
   width: 100%;
+  /* height: 100%; */
   /* border: red solid 2px; */
 `;
 S.UserDetails = styled.div`
@@ -185,11 +222,21 @@ S.About = styled.p`
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   margin-left: 5px;
+  height: 100%;
   width: 93%;
   white-space: pre-wrap;
+  /* padding-bottom: 100%; */
   /* border: 2px red solid; */
 `;
+S.ViewProfile = styled.div`
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
 
+  /* border: 1px red solid; */
+`;
 S.SwipeButtonsContainer = styled.div`
   position: absolute;
   display: flex;
@@ -264,21 +311,21 @@ S.SwipeIconButton = styled(IconButton)`
   &:focus:nth-child(3) {
     svg {
       animation-name: ${exitUpEnterUp};
-      animation-duration: 2.8s;
+      animation-duration: 2s;
       animation-timing-function: ease-in-out;
       /* animation-delay: 1.2s; */
     }
     p:nth-of-type(1) {
       animation-name: ${enterUpExitRight};
-      animation-duration: 1.5s;
+      animation-duration: 1.2s;
       animation-timing-function: ease-in-out;
     }
 
     p:nth-of-type(2) {
       animation-name: ${enterRightExitUp};
-      animation-duration: 1.5s;
+      animation-duration: 1.2s;
       animation-timing-function: ease-in-out;
-      animation-delay: 1.2s;
+      animation-delay: 0.9s;
     }
   }
 
@@ -320,6 +367,8 @@ S.Svg = styled.svg`
 `;
 
 export const TinderCards = () => {
+  const history = useHistory();
+
   const [people, setPeople] = useState([
     {
       id: 0,
@@ -377,12 +426,17 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
     favPower: 5,
   };
   const [lastDirection, setLastDirection] = useState();
+  const [favPower, setFavPower] = useState(authUser.favPower);
+
+  const favHintRef = React.createRef();
+  const favBtnRef = React.createRef();
+
   const childRefs = useMemo(
     () =>
       Array(people.length)
         .fill(0)
         .map((i) => React.createRef()),
-    []
+    [people.length]
   );
   const alreadyRemoved = [];
   const [photoSwitchIdx, setPhotoSwitchIdx] = useState(0);
@@ -433,19 +487,27 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
         "\n",
         people
       );
-      if (dir === "up")
-        setTimeout(
-          () => childRefs[index].current.swipe(dir), // Swipe the card!
-          2000
-        );
-      else childRefs[index].current.swipe(dir); // Swipe the card!
+      if (dir === "up") {
+        if (favPower !== 0) {
+          let favSwipe = favHintRef.current;
+          let favBtn = favBtnRef.current;
+
+          favSwipe.style["z-index"] = 1;
+          setTimeout(() => {
+            childRefs[index].current.swipe(dir);
+            favSwipe.style["z-index"] = -1;
+            favBtn.blur();
+            setFavPower(favPower <= 1 ? 0 : favPower - 1);
+          }, 1799);
+        }
+      } else childRefs[index].current.swipe(dir); // Swipe the card!
     }
   };
   const undo = () => {
     console.log("hrere", removedCards);
     setPhotoSwitchIdx(0);
-
-    setPeople([...people, removedCards[removedCards.length - 1]]);
+    if (removedCards.length - 1 >= 0)
+      setPeople([...people, removedCards[removedCards.length - 1]]);
   };
 
   //   useEffect(() => {
@@ -455,9 +517,9 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
   return (
     <S.TinderCardContainer>
       {people.map((person, index) => (
-        <S.TinderCardSwipe key={`${person.firstName}-tinderCardSwipe`}>
+        <S.TinderCardSwipe key={`${person.id}-tinderCardSwipe`}>
           <TinderCard
-            key={`${person.firstName}-tinderCard`}
+            key={`${person.id}-tinderCard`}
             ref={childRefs[index]}
             preventSwipe={["down"]}
             onCardLeftScreen={() => outOfFrame(person.id)}
@@ -465,7 +527,7 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
           >
             <S.TinderCard
               style={{ backgroundImage: `url(${person.url[photoSwitchIdx]})` }}
-              key={`${person.firstName}-TinderCardDiv`}
+              key={`${person.id}-TinderCardDiv`}
             >
               <S.PhotoSwitchBtnContainer>
                 {[...new Array(6)].map(
@@ -499,8 +561,10 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
                     ))
                 )}
               </S.PhotoSwitchBtnContainer>
-
-              <S.UserDataContainer key={`${person.firstName}-UserDetails>`}>
+              <S.SuperLikeHint ref={favHintRef} id="super-like">
+                SUPER LIKE
+              </S.SuperLikeHint>
+              <S.UserDataContainer key={`${person.id}-UserDetails>`}>
                 <S.UserDetails>
                   <S.UserName>{person.firstName}</S.UserName>
                   <S.UserAge>{person.age}</S.UserAge>
@@ -516,14 +580,14 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
                           .toLowerCase()
                           .search(p.toLowerCase()) !== -1 ? (
                           <S.PassionContainer
-                            key={`${person.firstName}-passion-${idx}`}
+                            key={`${person.id}-passion-${idx}`}
                           >
                             <S.Passion>{p}</S.Passion>
                           </S.PassionContainer>
                         ) : (
                           <S.PassionContainer
                             background="rgba(0,0,0,.3)"
-                            key={`${person.firstName}-passion-${idx}`}
+                            key={`${person.id}-passion-${idx}`}
                           >
                             <S.Passion>{p}</S.Passion>
                           </S.PassionContainer>
@@ -532,6 +596,9 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
                 </S.PassionsContainer>
                 <S.About>{person.about.substring(0, 155)}...</S.About>
               </S.UserDataContainer>
+              <S.ViewProfile
+                onClick={() => history.push(`profile/${person.id}`)}
+              />
             </S.TinderCard>
           </TinderCard>
         </S.TinderCardSwipe>
@@ -562,7 +629,11 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
             <path d="M14.926 12.56v-1.14l5.282 5.288c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L11.512 15h1.138l-5.363 5.125c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417l5.201-5.288v1.14L3.873 7.27c-1.137-.976-1.137-2.44 0-3.417a1.973 1.973 0 0 1 3.251 0l5.282 5.207H11.27l5.444-5.207c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417l-5.2 5.288z"></path>
           </S.Svg>
         </S.SwipeIconButton>
-        <S.SwipeIconButton fill="#24b9ff" onClick={() => swipe("up")}>
+        <S.SwipeIconButton
+          fill="#24b9ff"
+          ref={favBtnRef}
+          onClick={() => swipe("up")}
+        >
           <S.Svg
             viewBox="0 0 24 24"
             focusable="false"
@@ -571,8 +642,8 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
           >
             <path d="M21.06 9.06l-5.47-.66c-.15 0-.39-.25-.47-.41l-2.34-5.25c-.47-.99-1.17-.99-1.56 0L8.87 7.99c0 .16-.23.4-.47.4l-5.47.66c-1.01 0-1.25.83-.46 1.65l4.06 3.77c.15.16.23.5.15.66L5.6 20.87c-.16.98.4 1.48 1.33.82l4.69-2.79h.78l4.69 2.87c.78.58 1.56 0 1.25-.98l-1.02-5.75s0-.4.23-.57l3.91-3.86c.78-.82.78-1.64-.39-1.64v.08z"></path>
           </S.Svg>
-          <p> {authUser.favPower}</p>
-          <p> {authUser.favPower - 1}</p>
+          <p> {favPower}</p>
+          <p> {favPower === 0 ? 0 : favPower - 1}</p>
         </S.SwipeIconButton>
         <S.SwipeIconButton fill="#38e9ba" onClick={() => swipe("right")}>
           <S.Svg

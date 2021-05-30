@@ -221,6 +221,12 @@ export const EditAccount = () => {
   const [TF, setTF] = useState({
     about: "",
     passions: "",
+    job: "",
+    company: "",
+    school: "",
+    living: "",
+    gender: "",
+    sex: "",
   });
 
   const handleTF = (e, type) => {

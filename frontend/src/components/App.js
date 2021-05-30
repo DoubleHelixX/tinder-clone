@@ -20,6 +20,7 @@ import { contextTheme } from "../shared/_Constants";
 import { UploadImage } from "./UploadImage";
 import { EditAccount } from "./EditAccount";
 import { WebcamCapture } from "./WebcamCapture";
+import { ViewProfile } from "./ViewProfile";
 
 const S = {};
 S.AppContainer = styled.div`
@@ -73,6 +74,9 @@ const App = () => {
           </Route>
           <Route exact path="/account/edit">
             <EditAccount />
+          </Route>
+          <Route path="/profile/:id">
+            <ViewProfile />
           </Route>
 
           <Route exact path="/">
