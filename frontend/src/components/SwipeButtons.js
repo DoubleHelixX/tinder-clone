@@ -16,9 +16,13 @@ S.SwipeButtonsContainer = styled.div`
   width: 100%;
   justify-content: space-evenly;
   padding-bottom: 40px;
+  background-color: white;
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #fff);
+  position: fixed;
+  bottom: 0vh;
 `;
 S.SwipeIconButton = styled(IconButton)`
-  background-color: white;
+  background-color: white !important;
   border: 2px solid rgba(0, 0, 0, 0.04) !important;
 
   box-shadow: 0px 2px 53px 0px rgba(0, 0, 0, 0.12) !important;
@@ -86,17 +90,6 @@ export const SwipeButtons = () => {
     <S.SwipeButtonsContainer>
       <S.SwipeIconButton>
         <S.Svg
-          fill="#ffb203"
-          viewBox="0 0 24 24"
-          focusable="false"
-          aria-hidden="true"
-          role="presentation"
-        >
-          <path d="M12.119 4.599V3.307c0-1.216-.76-1.672-1.824-.988l-.608.304L6.04 5.13l-.456.304c-1.064.76-1.064 1.748 0 2.28l.38.38c.987.76 2.66 1.824 3.647 2.432l.532.304c.912.76 1.748.228 1.748-.912V8.246a5.125 5.125 0 0 1 5.167 5.167c0 2.888-2.28 5.092-5.167 5.092-3.04 0-5.32-2.28-5.32-5.168 0-.912-.76-1.671-1.747-1.671-1.064 0-1.824.76-1.824 1.671C3 18.125 6.951 22 11.815 22c4.787 0 8.738-3.8 8.738-8.663.076-4.711-3.875-8.51-8.662-8.51l.228-.228z"></path>
-        </S.Svg>
-      </S.SwipeIconButton>
-      <S.SwipeIconButton>
-        <S.Svg
           fill="#fe4b6b"
           width="34px"
           height="34px"
@@ -128,17 +121,6 @@ export const SwipeButtons = () => {
           role="presentation"
         >
           <path d="M21.994 10.225c0-3.598-2.395-6.212-5.72-6.212-1.78 0-2.737.647-4.27 2.135C10.463 4.66 9.505 4 7.732 4 4.407 4 2 6.62 2 10.231c0 1.52.537 2.95 1.533 4.076l8.024 7.357c.246.22.647.22.886 0l7.247-6.58.44-.401.162-.182.168-.174a6.152 6.152 0 0 0 1.54-4.09"></path>
-        </S.Svg>
-      </S.SwipeIconButton>
-      <S.SwipeIconButton>
-        <S.Svg
-          fill="#9b4ed9"
-          viewBox="0 0 24 24"
-          focusable="false"
-          aria-hidden="true"
-          role="presentation"
-        >
-          <path d="M15.979 14.018c.637-.638.51-1.275-.192-1.722l-1.275-.765c-.638-.383-1.148-1.275-.956-2.104L15.15 2.73c.191-.765-.128-.956-.765-.446L6.414 9.937c-.638.638-.51 1.275.19 1.722l1.276.765c.638.382 1.148 1.275.957 2.168l-1.658 6.632c-.191.829.191 1.02.765.446l8.035-7.652z"></path>
         </S.Svg>
       </S.SwipeIconButton>
     </S.SwipeButtonsContainer>

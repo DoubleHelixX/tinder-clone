@@ -232,74 +232,17 @@ export const EditPhotos = () => {
     {
       id: 0,
 
-      url: nel,
+      url: "https://images.unsplash.com/photo-1602345494286-7a71bed8c073?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
     },
     {
       id: 1,
 
-      url: nel2,
+      url: "https://images.unsplash.com/photo-1569421053595-ff9605a32977?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80",
     },
     {
       id: 2,
 
-      url: nel3,
-    },
-    {
-      id: 3,
-
-      url: nel4,
-    },
-    {
-      id: 4,
-
-      url: nel5,
-    },
-    {
-      id: 5,
-
-      url: nel6,
-    },
-    {
-      id: 6,
-
-      url: nel7,
-    },
-    {
-      id: 7,
-
-      url: nel8,
-    },
-    {
-      id: 8,
-
-      url: nel9,
-    },
-    {
-      id: 9,
-
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    },
-    {
-      id: 10,
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
-    },
-    {
-      id: 11,
-
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    },
-    {
-      id: 12,
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
-    },
-    {
-      id: 13,
-
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-    },
-    {
-      id: 14,
-      url: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      url: "https://images.unsplash.com/photo-1551292831-023188e78222?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
     },
   ]);
 
@@ -367,7 +310,6 @@ export const EditPhotos = () => {
               border="4px #dadfe6 dashed"
               borderRadius="8px"
               cursor="not-allowed"
-              pointerEvents="none"
             >
               <S.IconButton>
                 <S.AddIcon

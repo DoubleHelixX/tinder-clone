@@ -1,80 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import TextField from "@material-ui/core/TextField";
-
+import { scaleUp, scaleDown } from "../shared//keyframes";
+import { useHistory } from "react-router-dom";
 import "../index.css";
+import { SwipeButtons } from "./SwipeButtons";
 
 const S = {};
-S.AddMediaTxt = styled.p`
-  color: #ffffff;
-  font-size: 14px;
-  font-family: "Montserrat", sans-serif;
-  padding: 7px;
-`;
-S.TFContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px;
-`;
-S.TFTitle = styled.p`
-  align-self: flex-start;
-  padding: 10px;
-  padding-bottom: 6px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  color: #655c66;
-  /* border: 2px blue solid; */
-`;
-S.AboutMeTF = styled.span`
-  div {
-    padding: 20px;
-    /* border: 2px blue solid; */
-  }
-  .MuiFilledInput-root {
-    background: #fff;
-    width: 100vw;
-    height: 339px;
-    border: 1px solid #e8e8e8;
-    & textarea {
-      height: 100%;
-      /* border: 2px red solid; */
-    }
-    &:hover {
-      background: white;
-      box-shadow: 0px 2px 33px 0px rgba(0, 0, 0, 0.02);
-    }
-  }
-  /* & label.Mui-focused {
-    color: white;
-  }
-  & .MuiInput-underline:after {
-    border-bottom-color: white;
-  }
-  & .MuiOutlinedInput-root {
-    & fieldset {
-      border-color: white;
-    }
-    &:hover fieldset {
-      border-color: white;
-    }
-    &.Mui-focused fieldset {
-      border-color: white;
-    } */
-`;
-S.TFCounter = styled.p`
-  align-self: flex-start;
-  padding: 10px;
-  padding-bottom: 6px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  color: #655c66;
-  position: absolute;
-  bottom: 8px;
-  right: 10px;
-`;
 
 S.Container = styled.div`
   display: flex;
@@ -82,10 +13,38 @@ S.Container = styled.div`
   background-color: white;
   font-family: "Montserrat", sans-serif;
 `;
+S.PhotoContainer = styled.div`
+  position: relative;
+`;
 S.Photo = styled.img`
   height: 577.25px;
   width: 100%;
   object-fit: cover;
+`;
+S.GoBackBtn = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  border-radius: 40px;
+  top: 550px;
+  right: 20px;
+  cursor: pointer;
+  & > svg {
+    width: 52px;
+    height: 52px;
+  }
+  &:hover {
+    animation-name: ${scaleUp};
+    transform-origin: center;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  animation-name: ${scaleDown};
+  transform-origin: center;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 `;
 S.UserDetails = styled.div`
   display: flex;
@@ -118,12 +77,17 @@ S.OtherDetails = styled.div`
   display: flex;
   align-items: center;
   padding: 2px 2px 2px 15px;
+
   & > p {
+    font-size: 14px;
+    font-weight: 500;
     padding: 4px;
     color: #5c5c5c;
     /* font-weight: bold; */
   }
   & > svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 S.Bio = styled.p`
@@ -136,25 +100,54 @@ S.Bio = styled.p`
 S.PassionsField = styled.div`
   padding: 15px;
   & > h3 {
-    font-weight: 500;
+    font-weight: 600;
+    color: #444444;
   }
 `;
 S.PassionsContainer = styled.div`
+  /* border: 2px red solid; */
   display: flex;
-  padding: 12px;
+  padding: 12px 12px 12px 0px;
   flex-wrap: wrap;
   justify-content: space-between;
 `;
 S.Passion = styled.div`
-  color: #fd5068;
+  color: ${(props) => (props.color ? props.color : "#8B8B8B")};
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 80px;
-  margin: 4px;
-  border: 1px #fd5068 solid;
+  margin: 4px 4px 4px 0px;
+  border: 1px solid;
+  border-color: ${(props) => (props.color ? props.color : "#8B8B8B")}; ;
+`;
+S.Report = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #c8c8c8;
+  font-weight: bold;
+  padding: 18px;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 130px;
+  & > p {
+    cursor: pointer;
+    /* border: 2px red solid; */
+  }
+  & > p:hover {
+    color: #8b8b8b;
+    font-weight: bolder;
+  }
+
+  & > p:active {
+    transform: scale(1.2);
+  }
 `;
 
 export const ViewProfile = () => {
+  const history = useHistory();
+
   const [TF, setTF] = useState({
     about: `Good vibes. 😌
             Hairstyles. 💇🏾‍♀️
@@ -176,7 +169,31 @@ export const ViewProfile = () => {
   });
   return (
     <S.Container>
-      <S.Photo src={TF.images[0]} />
+      <S.PhotoContainer>
+        <S.Photo src={TF.images[0]} />
+        <S.GoBackBtn onClick={() => history.goBack()}>
+          <svg
+            viewBox="0 0 24 24"
+            focusable="false"
+            aria-hidden="true"
+            role="presentation"
+          >
+            <g transform="translate(2 2)" fill-rule="nonzero" fill="none">
+              <defs>
+                <linearGradient id="grad1" x1="16%" y1="86%" x2="100%" y2="15%">
+                  <stop offset="0%" stop-color="rgba(254, 111, 88, 1)" />
+                  <stop offset="91%" stop-color="rgba(253, 49, 119, 1)" />
+                </linearGradient>
+              </defs>
+              <circle fill="url(#grad1)" cx="10" cy="10" r="10"></circle>
+              <path
+                d="M9.35 14.561l-.895-1.09-1.301-1.587-.894-1.09c-.358-.437-.19-.794.375-.794h1.733c.096-.661.403-3.178.484-3.732.096-.66.516-1.147 1.146-1.147h.003c.63 0 1.05.487 1.147 1.147.08.554.387 3.071.484 3.732h1.732c.565 0 .734.357.376.793l-.894 1.09-1.302 1.588-.894 1.09c-.357.437-.943.437-1.3 0"
+                fill="#fff"
+              ></path>
+            </g>
+          </svg>
+        </S.GoBackBtn>
+      </S.PhotoContainer>
       <S.UserDetails>
         <S.NameAge>
           <h1>Taisha</h1>
@@ -203,8 +220,6 @@ export const ViewProfile = () => {
         <S.OtherDetails>
           <svg
             viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
             focusable="false"
             aria-hidden="true"
             role="presentation"
@@ -238,8 +253,6 @@ export const ViewProfile = () => {
         <S.OtherDetails>
           <svg
             viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
             focusable="false"
             aria-hidden="true"
             role="presentation"
@@ -256,8 +269,6 @@ export const ViewProfile = () => {
         <S.OtherDetails>
           <svg
             viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
             focusable="false"
             aria-hidden="true"
             role="presentation"
@@ -277,8 +288,6 @@ export const ViewProfile = () => {
         <S.OtherDetails>
           <svg
             viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
             focusable="false"
             aria-hidden="true"
             role="presentation"
@@ -298,8 +307,6 @@ export const ViewProfile = () => {
         <S.OtherDetails>
           <svg
             viewBox="0 0 24 24"
-            width="24px"
-            height="24px"
             focusable="false"
             aria-hidden="true"
             role="presentation"
@@ -319,14 +326,13 @@ export const ViewProfile = () => {
       </S.UserDetails>
       <S.Bio>
         {`nyc loser who snorts when she laughs 
-super duper shy 
-don't be a dick :)`}
+super duper shy `}
       </S.Bio>
       <S.PassionsField>
         <h3>Passions</h3>
         <S.PassionsContainer>
-          <S.Passion>Photography</S.Passion>
-          <S.Passion>Netflix</S.Passion>
+          <S.Passion color="#fd5068">Photography</S.Passion>
+          <S.Passion color="#fd5068">Netflix</S.Passion>
           <S.Passion>Music</S.Passion>
           <S.Passion>Art</S.Passion>
           <S.Passion>Fashion</S.Passion>
@@ -338,6 +344,10 @@ don't be a dick :)`}
           <S.Passion>Fashion</S.Passion>
         </S.PassionsContainer>
       </S.PassionsField>
+      <S.Report>
+        <p> Report Taisha</p>
+      </S.Report>
+      <SwipeButtons />
     </S.Container>
   );
 };

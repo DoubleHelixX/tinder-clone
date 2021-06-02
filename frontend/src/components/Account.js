@@ -336,12 +336,72 @@ export const Account = () => {
     "You and your dog make a great pic",
   ];
   const randomNumber = Math.floor(Math.random() * tipArry.length);
+  const [people, setPeople] = useState([
+    {
+      id: 0,
+      firstName: "Aiony",
+      lastName: "Haust",
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
+      url: [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      ],
+      timestamp: "2 days ago",
+      age: "26",
+      passions: "biking, Yoga, Fashion",
+      about: `IG: idreamofAsha 
+      just trying to make friends 😚`,
+    },
+    {
+      id: 1,
+      firstName: "Sara",
+      lastName: "W",
+      message: `I can give you lots of moneys 😉`,
+      url: [
+        "https://images.unsplash.com/photo-1552381098-cf94e6c653b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80",
+      ],
+      timestamp: "1 week ago",
+      age: "19",
+      passions: "traveling, foodie",
+      about: `I’m a princess, I’m also a Scorpio   
+      insta: itziardeclavijo`,
+      favPower: 5,
+    },
+    {
+      id: 3,
+      firstName: "Clare",
+      lastName: "",
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
+      url: [
+        "https://images.unsplash.com/photo-1602345494286-7a71bed8c073?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+        "https://images.unsplash.com/photo-1569421053595-ff9605a32977?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80",
+        "https://images.unsplash.com/photo-1551292831-023188e78222?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+      ],
+      timestamp: "2 days ago",
+      age: "27",
+      passions: "Poetry ,Yoga, Fashion",
+      about: `A sunset is`,
+    },
+    {
+      id: 4,
+      firstName: "Janice",
+      lastName: "",
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
+      url: [
+        "https://images.unsplash.com/photo-1592621385645-e41659e8aabe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80",
+        "https://images.unsplash.com/photo-1603648279492-a526670a508d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=632&q=80",
+      ],
+      timestamp: "2 days ago",
+      age: "29",
+      passions: "Fashion",
+      about: `Lets share secrets`,
+    },
+  ]);
 
   return (
     <S.AccountContainer>
       <S.ContentBody>
         <S.AvatarContainer>
-          <S.Avatar alt={nel} src={nel}></S.Avatar>
+          <S.Avatar alt={people[2].id} src={people[2].url}></S.Avatar>
           <Link to="/account/edit">
             <S.ButtonBorder top="12px" right="15px" padding="15px" />
             <S.PencilIcon
@@ -355,7 +415,7 @@ export const Account = () => {
           </Link>
         </S.AvatarContainer>
         <S.UserDetailsContainer>
-          <S.UserDetails>Nel, 102 </S.UserDetails>
+          <S.UserDetails>Clare 27 </S.UserDetails>
 
           <S.VerifiedIcon
             viewBox="0 0 24 24"
@@ -376,10 +436,8 @@ export const Account = () => {
             </g>
           </S.VerifiedIcon>
         </S.UserDetailsContainer>
-        <S.Occupation>
-          Full time professional sleeper at nursing home
-        </S.Occupation>
-        <S.School>Orkin Pigeon Academy</S.School>
+        <S.Occupation>Full time professional model and dancer.</S.Occupation>
+        <S.School>Columbia University</S.School>
         <S.ButtonsContainer>
           <S.ButtonContainer margin=" 0px auto 0px 12px ">
             <S.IconButton>

@@ -68,7 +68,17 @@ export const scaleUp = keyframes`
 
 }
 100% {
-  transform: scale(1.1);
+  transform: scale(1.2);
+
+}
+`;
+export const scaleDown = keyframes`
+0% {
+  transform: scale(1.2);
+
+}
+100% {
+  transform: scale(1.0);
 
 }
 `;

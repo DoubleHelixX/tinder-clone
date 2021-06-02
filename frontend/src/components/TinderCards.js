@@ -17,6 +17,8 @@ import {
   exitUpEnterUp,
   fadeInUp,
   rollIn,
+  scaleUp,
+  scaleDown,
 } from "../shared//keyframes";
 
 import nel from "../images/nel.png";
@@ -232,9 +234,33 @@ S.ViewProfile = styled.div`
   width: 100%;
   height: 50px;
   position: absolute;
+  display: flex;
   bottom: 0;
   cursor: pointer;
+  justify-content: space-between;
+  & > p {
+    flex: 1;
+  }
+  & > svg {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    box-shadow: 0px 4px 10px -4px hsl(0deg 0% 23% / 32%);
 
+    animation-name: ${scaleDown};
+    transform-origin: center;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    &:hover {
+      animation-name: ${scaleUp};
+      transform-origin: center;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
   /* border: 1px red solid; */
 `;
 S.SwipeButtonsContainer = styled.div`
@@ -246,7 +272,7 @@ S.SwipeButtonsContainer = styled.div`
   /* border: 2px red solid; */
 `;
 S.SwipeIconButton = styled(IconButton)`
-  border: 2px solid rgba(0, 0, 0, 0.04) !important;
+  border: 2px solid rgba(0, 0, 0, 0) !important;
   position: relative !important;
 
   box-shadow: 0px 2px 53px 0px rgba(0, 0, 0, 0.12) !important;
@@ -372,42 +398,61 @@ export const TinderCards = () => {
   const [people, setPeople] = useState([
     {
       id: 0,
-      firstName: "Nel",
-      lastName: "",
-      message: "Hey cutie ! how is your day going? 😃",
-      url: [nel, nel2, nel3, nel4, nel5, nel6, nel7, nel8, nel9],
-      timestamp: "32 minutes ago",
-      age: "32",
-      passions: "Fishing, Bending Over, Foodie, Country Music",
-      about: `I’m a princess only at night ;)`,
-    },
-    {
-      id: 1,
       firstName: "Aiony",
       lastName: "Haust",
       message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
       url: [
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
-        "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
       ],
       timestamp: "2 days ago",
       age: "26",
       passions: "biking, Yoga, Fashion",
       about: `IG: idreamofAsha 
-
-
-I’m shy, private, But I’m fun. I’m educated, opinionated, but also open minded. Homebody. Not sure what I’m on here for. But I’m always open to friends. Don’t hit me up on no bullshit thx.`,
+      just trying to make friends 😚`,
+    },
+    {
+      id: 1,
+      firstName: "Sara",
+      lastName: "W",
+      message: `I can give you lots of moneys 😉`,
+      url: [
+        "https://images.unsplash.com/photo-1552381098-cf94e6c653b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80",
+      ],
+      timestamp: "1 week ago",
+      age: "19",
+      passions: "traveling, foodie",
+      about: `I’m a princess, I’m also a Scorpio   
+      insta: itziardeclavijo`,
+      favPower: 5,
     },
     {
       id: 3,
-      firstName: "Nel",
+      firstName: "Clare",
       lastName: "",
-      message: "Hey cutie ! how is your day going? 😃",
-      url: [nel2, nel3, nel4, nel5, nel6, nel7, nel8, nel9],
-      timestamp: "32 minutes ago",
-      age: "32",
-      passions: "Fishing, Bending Over, Foodie, Country Music",
-      about: `I’m a princess only at night ;)`,
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
+      url: [
+        "https://images.unsplash.com/photo-1602345494286-7a71bed8c073?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+        "https://images.unsplash.com/photo-1569421053595-ff9605a32977?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80",
+        "https://images.unsplash.com/photo-1551292831-023188e78222?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+      ],
+      timestamp: "2 days ago",
+      age: "27",
+      passions: "Poetry ,Yoga, Fashion",
+      about: `A sunset is`,
+    },
+    {
+      id: 4,
+      firstName: "Janice",
+      lastName: "",
+      message: `yeah I'm avaiable tomorrow if you want to meet 😍`,
+      url: [
+        "https://images.unsplash.com/photo-1592621385645-e41659e8aabe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80",
+        "https://images.unsplash.com/photo-1603648279492-a526670a508d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=632&q=80",
+      ],
+      timestamp: "2 days ago",
+      age: "29",
+      passions: "Fashion",
+      about: `Lets share secrets`,
     },
   ]);
   const authUser = {
@@ -598,7 +643,22 @@ I’m shy, private, But I’m fun. I’m educated, opinionated, but also open mi
               </S.UserDataContainer>
               <S.ViewProfile
                 onClick={() => history.push(`profile/${person.id}`)}
-              />
+              >
+                <p />
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  height="24px"
+                  focusable="false"
+                  aria-hidden="true"
+                  role="presentation"
+                >
+                  <path
+                    fill="#fff"
+                    d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                  ></path>
+                </svg>
+              </S.ViewProfile>
             </S.TinderCard>
           </TinderCard>
         </S.TinderCardSwipe>
